@@ -1,11 +1,12 @@
 import * as React from "react";
 import loginImage from "../../assets/images/login-page-image.png";
+import { useAuth } from "../../context/auth-context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -17,13 +18,22 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.target.form); // Doğru form elemanını alın
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      await login(email, password);
+      navigate("/");
+      console.log("login succesfull");
+    } catch (error) {
+      console.error("Giriş başarısız:", error);
+    }
   };
 
   return (
@@ -93,6 +103,7 @@ const Login = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
               >
                 Giriş Yap
               </Button>

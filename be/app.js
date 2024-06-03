@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/db'); // Veritabanı bağlantısı
+const cors = require('cors'); // CORS middleware'ini içeri aktarın
 
 // Rota dosyaları
 const userRoutes = require('./routes/userRoutes');
@@ -11,6 +12,7 @@ const app = express();
 const port = 3000;
 
 // Middleware
+app.use(cors()); // CORS middleware'ini kullanın
 app.use(bodyParser.json());
 
 // Rotalar
