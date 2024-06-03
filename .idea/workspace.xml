@@ -1,4 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PropertiesComponent">{}</component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b710b187-390c-41bb-ae5b-5023cb3f49d9" name="Changes" comment="first commit for fe">
+      <change afterPath="$PROJECT_DIR$/be/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/config/db.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/controllers/adController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/controllers/messageController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/controllers/userController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/models/Ad.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/models/Message.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/models/User.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/mySQL/mysql-installer-web-community-8.0.37.0.msi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/routes/adRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/routes/messageRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/be/routes/userRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/be/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;cemugras&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/buseugrs/transport-app&quot;,
+    &quot;accountId&quot;: &quot;ed0c9972-464c-4a2c-b40e-f440a19017e2&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2hN4YbIbaRD6T3wkPu08qC3pRqP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cemug\IdeaProjects\transport-app\be\mySQL" />
+      <recent name="C:\Users\cemug\IdeaProjects\transport-app\be" />
+      <recent name="C:\Users\cemug\IdeaProjects\transport-app\fe" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b710b187-390c-41bb-ae5b-5023cb3f49d9" name="Changes" comment="" />
+      <created>1717421249794</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717421249794</updated>
+      <workItem from="1717421250986" duration="1096000" />
+      <workItem from="1717447807663" duration="3269000" />
+    </task>
+    <task id="LOCAL-00001" summary="first commit for fe">
+      <option name="closed" value="true" />
+      <created>1717421523035</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717421523035</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit for fe" />
+    <option name="LAST_COMMIT_MESSAGE" value="first commit for fe" />
+  </component>
 </project>
