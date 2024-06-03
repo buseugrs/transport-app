@@ -1,0 +1,67 @@
+.footer {
+  background-color: #ffffff;
+  color: #5b1e1e;
+  padding: 30px 0;
+  text-align: center; /* Tüm içeriği ortala */
+}
+
+.box-container {
+  display: flex;
+  justify-content: center; /* Kutuları yatay olarak ortala */
+  flex-wrap: wrap;
+}
+
+.box {
+  flex: 1;
+  padding: 0 20px;
+  text-align: center; /* Kutuları sola hizala */
+}
+
+.box h3 {
+  margin-bottom: 20px;
+}
+
+.box a {
+  display: block;
+  margin-bottom: 10px;
+  color: #b66363;
+  text-decoration: none;
+}
+
+.box a:hover {
+  color: #480d0d;
+}
+
+.share {
+  margin-top: 20px;
+}
+
+.footer .share {
+  padding: 1rem 0;
+  display: flex; /* İkonları yatay olarak hizalamak için flex kullanıyoruz */
+  justify-content: center; /* İkonları ortalamak için */
+}
+
+.footer .share a {
+  height: 3.5rem; /* İkonların yüksekliğini küçülttük */
+  width: 3.5rem; /* İkonların genişliğini küçülttük */
+  line-height: 3.5rem; /* İkonların dikey hizalaması */
+  font-size: 1.6rem; /* İkon boyutunu daha da düşürdük */
+  color: #fff;
+  background: #580b0b9f;
+  margin: 0 0.3rem;
+  border-radius: 50%;
+}
+
+.footer .share a:hover {
+  background: #630909;
+}
+
+.credit {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.credit span {
+  font-weight: bold;
+}
