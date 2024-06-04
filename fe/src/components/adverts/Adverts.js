@@ -15,7 +15,18 @@ const Adverts = ({ advert }) => {
   return (
     <Card sx={{ width: 320 }}>
       <div>
-        <Typography level="title-lg">{advert.adTitle}</Typography>
+        <Typography
+          level="title-lg"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 1,
+          }}
+        >
+          {advert.adTitle}
+        </Typography>
         {currentUser && (
           <IconButton
             aria-label={`bookmark ${advert.adTitle}`}
