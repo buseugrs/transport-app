@@ -133,7 +133,7 @@ const Login = () => {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/kayit" variant="body2">
                     {"Henüz hesabın yok mu? Hesap Aç"}
                   </Link>
                 </Grid>
