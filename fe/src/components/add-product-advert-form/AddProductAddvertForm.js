@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Card,
   CardContent,
@@ -161,29 +162,26 @@ const AddProductAddvertForm = () => {
       setSnackbarMessage("Lütfen tüm alanları doldurun");
       return;
     }
-
-    if (editing) {
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === newProduct.id ? newProduct : product
-        )
-      );
-      setSnackbarMessage("Ürün başarıyla güncellendi");
-    } else {
-      const newId =
-        products.length > 0
-          ? Math.max(...products.map((p) => parseInt(p.id))) + 1
-          : 1;
-
-      const productWithId = {
-        ...newProduct,
-        id: newId.toString(),
-      };
-
-      setProducts([...products, productWithId]);
-      setSnackbarMessage("Ürün başarıyla eklendi");
-    }
-
+  
+    const adData = {
+      adPhoto: newProduct.images[0], // İlan fotoğrafı
+      adTitle: newProduct.name, // İlan başlığı
+      adDescription: newProduct.description, // İlan açıklaması
+      budget: newProduct.budget, // Bütçe
+      isProduct: true, // Ürün ilanı olduğunu belirtiyoruz
+      productSpecialType: newProduct.pname, // Ürün türü
+      productSpecialDate: newProduct.deliveryDate, // Teslim tarihi
+      productSpecialStartCity: newProduct.fromCity, // Başlangıç şehri
+      productSpecialEndCity: newProduct.toCity, // Varış şehri
+      productSpecialIsElevatorNeeded: newProduct.elevatorRequired === "yes" ? true : false, // Asansör gereksinimi
+      productSpecialStartFloor: parseInt(newProduct.fromFloor), // Başlangıç katı
+      productSpecialEndFloor: parseInt(newProduct.toFloor), // Varış katı
+    };
+  
+    axios.post("http://localhost:3000/ads/add", adData)
+  .then(() => {
+    setSnackbarMessage("Ürün başarıyla eklendi");
+    setSnackbarOpen(true);
     setNewProduct({
       id: "",
       name: "",
@@ -198,8 +196,14 @@ const AddProductAddvertForm = () => {
       deliveryDate: "",
       images: [],
     });
-    setSnackbarOpen(true);
     setEditing(false);
+  })
+  .catch(error => {
+    console.error(error.response.data.message); // Sunucudan gelen hata mesajı
+    setSnackbarMessage("Ürün eklenirken bir hata oluştu: " + error.response.data.message);
+    setSnackbarOpen(true);
+  });
+
   };
 
   const handleCloseSnackbar = () => {

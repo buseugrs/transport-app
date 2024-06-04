@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import {
   Typography,
   Box,
@@ -158,7 +159,7 @@ const AddVehicleAdvertForm = () => {
     }
   };
 
-  const handleAddListing = () => {
+const handleAddListing = async () => {
     if (
       newListing.name === "" ||
       newListing.post === "" ||
@@ -172,26 +173,21 @@ const AddVehicleAdvertForm = () => {
       return;
     }
 
-    if (editing) {
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === newListing.id ? newListing : product
-        )
-      );
-      setSnackbarMessage("İlanınız başarıyla güncellendi");
-    } else {
-      const newId = getNextId();
+    const adData = {
+      adPhoto: newListing.images[0], // İlan fotoğrafı
+      adTitle: newListing.name, // İlan başlığı
+      adDescription: newListing.description, // İlan açıklaması
+      budget: newListing.budget, // Bütçe
+      isProduct: false, // Araç ilanı olduğunu belirtiyoruz
+      vehicleSpecialLicensePlate: newListing.post,
+      vehicleSpecialType: newListing.pname,
+      vehicleSpecialServiceCities: newListing.selectedCities.toString()
+    };
 
-      const listingWithId = {
-        ...newListing,
-        id: newId,
-      };
-
-      setProducts([...products, listingWithId]);
-      setSnackbarMessage("İlanınız başarıyla kaydedildi");
-    }
-
-    setSubmittedListing(newListing);
+    axios.post("http://localhost:3000/ads/add", adData)
+  .then(() => {
+    setSnackbarMessage("Ürün başarıyla eklendi");
+    setSnackbarOpen(true);
     setNewListing({
       id: "",
       name: "",
@@ -202,10 +198,17 @@ const AddVehicleAdvertForm = () => {
       selectedCities: [],
       description: "",
       images: [],
-    });
+    })
+  .catch(error => {
+    console.error(error.response.data.message); // Sunucudan gelen hata mesajı
+    setSnackbarMessage("Ürün eklenirken bir hata oluştu: " + error.response.data.message);
     setSnackbarOpen(true);
-    setEditing(false);
-  };
+  });
+
+})
+};
+
+
 
   const handleEdit = (id) => {
     const productToEdit = products.find((product) => product.id === id);

@@ -4,7 +4,8 @@ const sequelize = require('../config/db');
 const Ad = sequelize.define('Ad', {
     adPhoto: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
+        defaultValue: ""
     },
     adTitle: {
         type: DataTypes.STRING,
@@ -14,21 +15,55 @@ const Ad = sequelize.define('Ad', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    companyName: {
+    budget: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    vehicleType: {
-        type: DataTypes.STRING,
+    isProduct: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    cities: {
+    //Product İlanlarına Özel Alanlar
+    productSpecialType: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
-    userId: {
+    productSpecialDate: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    productSpecialStartCity: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    productSpecialEndCity: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    productSpecialIsElevatorNeeded: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
+    },
+    productSpecialStartFloor: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
+    },
+    productSpecialEndFloor: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    //Vehicle İlanlarına Özel Alanlar
+    vehicleSpecialLicensePlate: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    vehicleSpecialType: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    vehicleSpecialServiceCities: {
+        type: DataTypes.TEXT,
+        allowNull: true
     }
 }, {
     timestamps: true

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
 
 import { styled, alpha } from "@mui/material/styles";
@@ -74,6 +74,10 @@ const Header = () => {
     navigate("/profile");
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -108,21 +112,15 @@ const Header = () => {
         sx={{ backgroundColor: "transparent", boxShadow: "none" }}
       >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            sx={{ color: "black" , mr: 2}}
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
+            onClick={handleLogoClick}
             variant="h6"
             noWrap
             component="div"
             sx={{
               display: { xs: "none", sm: "flex" },
               alignItems: "center",
+              cursor: "pointer",
             }}
           >
             <Box mr={1}>
