@@ -14,7 +14,7 @@ const Adverts = ({ advert }) => {
 
   return (
     <Card sx={{ width: 320 }}>
-      <div>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <Typography
           level="title-lg"
           sx={{
@@ -23,6 +23,7 @@ const Adverts = ({ advert }) => {
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 1,
+            marginRight: "8px", // Sağ tarafta bir boşluk bırakmak için
           }}
         >
           {advert.adTitle}
