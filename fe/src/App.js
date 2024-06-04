@@ -2,10 +2,10 @@ import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
+  Route
 } from "react-router-dom";
 import { AuthProvider } from "./context/auth-context/AuthContext";
+import { AdvertsProvider } from "./context/adverts-context/AdvertsContext";
 import Home from "./pages/home-page/Home";
 import Login from "./pages/login-page/Login";
 import SignUp from "./pages/sign-up-page/SignUp";
@@ -15,12 +15,14 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <AdvertsProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/giris" element={<Login />} />
           <Route path="/kayit" element={<SignUp />} />
           <Route path="/profile" element={<UserProfile />} />
         </Routes>
+        </AdvertsProvider>
       </AuthProvider>
     </Router>
   );

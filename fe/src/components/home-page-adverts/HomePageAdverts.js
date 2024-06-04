@@ -1,38 +1,25 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import Adverts from '../adverts/Adverts';
+import { useAdverts } from '../../context/adverts-context/AdvertsContext';
 
 const HomePageAdverts = () => {
-  const adverts = [
-    {
-      id: 1,
-      baslik: "İlan Başlığı 1",
-      gorsel: "https://via.placeholder.com/150",
-      price: "$2,900"
-    },
-    {
-      id: 2,
-      baslik: "İlan Başlığı 2",
-      gorsel: "https://via.placeholder.com/150",
-      price: "$3,200"
-    },
-    {
-      id: 3,
-      baslik: "İlan Başlığı 3",
-      gorsel: "https://via.placeholder.com/150",
-      price: "$1,800"
-    }
-  ];
+  const adverts = useAdverts();
 
-  return (
-    <Grid container spacing={2}>
-      {adverts.map((advert) => (
-        <Grid item xs={12} sm={6} md={4} key={advert.id}>
-          <Adverts advert={advert} />
-        </Grid>
-      ))}
-    </Grid>
-  );
+  if (adverts) {
+    return (
+      <Grid container spacing={2}>
+        {adverts.map((advert) => (
+          <Grid item xs={12} sm={6} md={4} key={advert.id}>
+            <Adverts advert={advert} />
+          </Grid>
+        ))}
+      </Grid>
+    );
+  } else {
+    return "Loading";
+  }
+
 }
 
 export default HomePageAdverts;

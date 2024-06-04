@@ -11,9 +11,9 @@ const Adverts = ({ advert }) => {
   return (
     <Card sx={{ width: 320 }}>
       <div>
-        <Typography level="title-lg">{advert.baslik}</Typography>
+        <Typography level="title-lg">{advert.adTitle}</Typography>
         <IconButton
-          aria-label={`bookmark ${advert.baslik}`}
+          aria-label={`bookmark ${advert.adTitle}`}
           variant="plain"
           color="neutral"
           size="sm"
@@ -24,9 +24,9 @@ const Adverts = ({ advert }) => {
       </div>
       <AspectRatio minHeight="120px" maxHeight="200px">
         <img
-          src={advert.gorsel}
+          src={advert.adPhoto}
           loading="lazy"
-          alt={advert.baslik}
+          alt={advert.adTitle}
         />
       </AspectRatio>
       <CardContent orientation="horizontal">
@@ -40,7 +40,7 @@ const Adverts = ({ advert }) => {
           variant="solid"
           size="md"
           color="primary"
-          aria-label={`Explore ${advert.baslik}`}
+          aria-label={`Explore ${advert.adTitle}`}
           sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
         >
           Explore

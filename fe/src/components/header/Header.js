@@ -18,7 +18,6 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Button from "@mui/material/Button";
 import logoIcon from "../../assets/images/logo-icon.png";
 import logoText from "../../assets/images/logo-text.png";
 
