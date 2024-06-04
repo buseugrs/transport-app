@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -24,10 +25,20 @@ const Main = styled("main")(({ theme }) => ({
 
 const UserProfile = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const navigate = useNavigate();
 
   const handleListItemClick = (index) => {
     setActiveIndex(index);
   };
+
+  const handleAddProductAdvert = (index) => {
+    navigate("/add-product-advert");
+  };
+
+  const handleAddvehicleAdvert = (index) => {
+    navigate("/add-vehicle-advert");
+  };
+
   return (
     <Box
       sx={{
@@ -131,8 +142,16 @@ const UserProfile = () => {
             </Grid>
           </Grid>
           <Box textAlign="center" mt={2}>
-            <Button variant="contained" color="primary">
-              Hemen İlan Ver
+            <Button
+              onClick={handleAddProductAdvert}
+              variant="contained"
+              color="primary"
+              sx={{ mr: 2 }}
+            >
+              Eşya İlanı Ver
+            </Button>
+            <Button onClick={handleAddvehicleAdvert} variant="contained" color="primary">
+              Araç İlanı Ver
             </Button>
           </Box>
         </Main>
