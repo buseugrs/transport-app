@@ -8,7 +8,8 @@ import {
 import { AuthProvider } from "./context/auth-context/AuthContext";
 import Home from "./pages/home-page/Home";
 import Login from "./pages/login-page/Login";
-import SignUp from "./pages/sign-up/SignUp";
+import SignUp from "./pages/sign-up-page/SignUp";
+import UserProfile from "./pages/user-profile/UserProfile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/giris" element={<Login />} />
           <Route path="/kayit" element={<SignUp />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </AuthProvider>
     </Router>

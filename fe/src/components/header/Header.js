@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
+
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -61,14 +62,45 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileClick = () => {
+    handleMenuClose();
+    navigate("/profile");
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleLogout = () => {
     logout();
+    handleMenuClose();
   };
 
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
+
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={Boolean(anchorEl)}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </Menu>
+  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -80,9 +112,8 @@ const Header = () => {
           <IconButton
             size="large"
             edge="start"
-            color="black"
+            sx={{ color: "black" , mr: 2}}
             aria-label="open drawer"
-            sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>
@@ -91,15 +122,14 @@ const Header = () => {
             noWrap
             component="div"
             sx={{
-              display: { xs: "none", sm: "flex" }, // sm boyutunda flex kullan
-              alignItems: "center", // görselleri dikey hizala
+              display: { xs: "none", sm: "flex" },
+              alignItems: "center",
             }}
           >
             <Box mr={1}>
-              <img src={logoIcon} alt="" style={{ marginRight: "8px" }} />{" "}
-              {/* İlk görsel */}
+              <img src={logoIcon} alt="" style={{ marginRight: "8px" }} />
             </Box>
-            <img src={logoText} alt="" /> {/* İkinci görsel */}
+            <img src={logoText} alt="" />
           </Typography>
 
           <Search>
@@ -118,7 +148,7 @@ const Header = () => {
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
-                  color="black"
+                  sx={{ color: "black" }}
                 >
                   <Badge badgeContent={4} color="error">
                     <MailIcon />
@@ -127,7 +157,7 @@ const Header = () => {
                 <IconButton
                   size="large"
                   aria-label="show 17 new notifications"
-                  color="black"
+                  sx={{ color: "black" }}
                 >
                   <Badge badgeContent={17} color="error">
                     <NotificationsIcon />
@@ -139,18 +169,17 @@ const Header = () => {
                   aria-label="account of current user"
                   aria-controls={menuId}
                   aria-haspopup="true"
-                  //onClick={handleProfileMenuOpen}
-                  color="black"
+                  onClick={handleProfileMenuOpen}
+                  sx={{ color: "black" }}
                 >
                   <AccountCircle />
                 </IconButton>
-                <Button onClick={handleLogout}>Logout</Button>
               </>
             ) : (
               <>
                 <MenuItem component={Link} to="/giris" sx={{ color: "black" }}>
                   Giriş Yap
-                </MenuItem>{" "}
+                </MenuItem>
                 <MenuItem component={Link} to="/kayit" sx={{ color: "black" }}>
                   Hesap Aç
                 </MenuItem>
@@ -163,14 +192,14 @@ const Header = () => {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              //onClick={handleMobileMenuOpen}
-              color="black"
+              sx={{ color: "black" }}
             >
               <MoreIcon />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
+      {renderMenu}
     </Box>
   );
 };
