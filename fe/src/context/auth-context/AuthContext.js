@@ -25,13 +25,15 @@ export const AuthProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
-  const signup = async (email, password) => {
+  const signup = async (username, email, password) => {
     try {
       const response = await axios.post("http://localhost:3000/users/create", {
+        username,
         email,
         password,
       });
       setCurrentUser({
+        username: response.data.username,
         email: response.data.email,
         password: response.data.password,
       });

@@ -1,4 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
+import { useAuth } from "../../context/auth-context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,13 +18,28 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 const SignUp = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await signup(formData.username, formData.email, formData.password);
+      navigate("/giris");
+      console.log("Başarılı kayıt!");
+    } catch (error) {
+      console.error("Kayıt başarısız:", error);
+    }
   };
 
   return (
@@ -41,22 +60,19 @@ const SignUp = () => {
           <Typography component="h1" variant="h5">
             Hesap Aç
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  username="username"
+                  autoComplete="username"
+                  name="username"
                   required
                   fullWidth
                   id="username"
                   label="Kullanıcı Adı"
                   autoFocus
+                  value={formData.username}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -67,6 +83,8 @@ const SignUp = () => {
                   label="E-posta Adresi"
                   name="email"
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -78,11 +96,13 @@ const SignUp = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={formData.password}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              onClick={handleSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -91,7 +111,7 @@ const SignUp = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/giris" variant="body2">
                   Zaten hesabın var mı? Giriş Yap
                 </Link>
               </Grid>
