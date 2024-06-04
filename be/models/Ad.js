@@ -3,9 +3,8 @@ const sequelize = require('../config/db');
 
 const Ad = sequelize.define('Ad', {
     adPhoto: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        defaultValue: ""
+        type: DataTypes.TEXT('long'),
+        allowNull: true
     },
     adTitle: {
         type: DataTypes.STRING,

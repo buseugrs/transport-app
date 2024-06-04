@@ -34,7 +34,7 @@ const AddVehicleAdvertForm = () => {
     budget: "",
     selectedCities: [],
     description: "",
-    images: [],
+    image: "",
   });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -143,23 +143,22 @@ const AddVehicleAdvertForm = () => {
   };
 
   const handleImageChange = (e) => {
-    const imagesArray = Array.from(e.target.files);
-    setNewListing((prev) => ({
-      ...prev,
-      images: [...prev.images, ...imagesArray],
-    }));
-  };
-
-  const getNextId = () => {
-    if (products.length === 0) {
-      return "1";
-    } else {
-      const lastId = parseInt(products[products.length - 1].id);
-      return (lastId + 1).toString();
-    }
+    const file = e.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setNewListing((prev) => ({
+        ...prev,
+        image: base64String, // Base64 formatına dönüştürülmüş resim
+      }));
+    };
+  
+    reader.readAsDataURL(file);
   };
 
 const handleAddListing = async () => {
+  console.log("handleAddListing");
     if (
       newListing.name === "" ||
       newListing.post === "" ||
@@ -172,9 +171,10 @@ const handleAddListing = async () => {
       setSnackbarMessage("Lütfen tüm alanları doldurun");
       return;
     }
+  
 
     const adData = {
-      adPhoto: newListing.images[0], // İlan fotoğrafı
+      adPhoto: newListing.image, // İlan fotoğrafı
       adTitle: newListing.name, // İlan başlığı
       adDescription: newListing.description, // İlan açıklaması
       budget: newListing.budget, // Bütçe
@@ -183,52 +183,33 @@ const handleAddListing = async () => {
       vehicleSpecialType: newListing.pname,
       vehicleSpecialServiceCities: newListing.selectedCities.toString()
     };
-
+    
     axios.post("http://localhost:3000/ads/add", adData)
-  .then(() => {
-    setSnackbarMessage("Ürün başarıyla eklendi");
-    setSnackbarOpen(true);
-    setNewListing({
-      id: "",
-      name: "",
-      post: "",
-      pname: "",
-      pbg: "primary.main",
-      budget: "",
-      selectedCities: [],
-      description: "",
-      images: [],
-    })
-  .catch(error => {
-    console.error(error.response.data.message); // Sunucudan gelen hata mesajı
-    setSnackbarMessage("Ürün eklenirken bir hata oluştu: " + error.response.data.message);
-    setSnackbarOpen(true);
-  });
+      .then(() => {
+        setSnackbarMessage("Ürün başarıyla eklendi");
+        setSnackbarOpen(true);
+        setNewListing({
+          id: "",
+          name: "",
+          post: "",
+          pname: "",
+          pbg: "primary.main",
+          budget: "",
+          selectedCities: [],
+          description: "",
+          image: "",
+        });
+      })
+      .catch(error => {
+        console.error(error.response.data.message); // Sunucudan gelen hata mesajı
+        setSnackbarMessage("Ürün eklenirken bir hata oluştu: " + error.response.data.message);
+        setSnackbarOpen(true);
+      });
+}
 
-})
+const handleCloseSnackbar = () => {
+  setSnackbarOpen(false);
 };
-
-
-
-  const handleEdit = (id) => {
-    const productToEdit = products.find((product) => product.id === id);
-    setNewListing(productToEdit);
-    setEditing(true);
-  };
-
-  const handleCloseSnackbar = () => {
-    setSnackbarOpen(false);
-  };
-
-  const handleExpandDescription = (id) => {
-    setExpandedDescription((prev) => (prev === id ? null : id));
-  };
-
-  const getDescriptionPreview = (description) => {
-    const maxLength = 100;
-    if (description.length <= maxLength) return description;
-    return description.slice(0, maxLength) + "...";
-  };
 
   return (
     <Box>
@@ -257,21 +238,18 @@ const handleAddListing = async () => {
                 hidden
               />
             </Button>
-            <Box display="flex" flexWrap="wrap" gap={2}>
-              {newListing.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(image)}
-                  alt={`Resim ${index + 1}`}
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "cover",
-                    margin: "8px",
-                  }}
-                />
-              ))}
-            </Box>
+            <Box display="flex" justifyContent="center">
+  <img
+    src={newListing.image} // Base64 formatındaki görsel
+    alt="Görsel"
+    style={{
+      width: "300px",
+      height: "auto",
+      objectFit: "cover",
+    }}
+  />
+</Box>
+
             <TextField
               label="Firma Adı"
               name="name"

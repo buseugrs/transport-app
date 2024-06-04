@@ -35,7 +35,7 @@ const AddProductAddvertForm = () => {
     fromFloor: "",
     toFloor: "",
     deliveryDate: "",
-    images: [],
+    image: "",
   });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -130,22 +130,19 @@ const AddProductAddvertForm = () => {
     setNewProduct((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = async (e) => {
-    const files = e.target.files;
-    const imagesArray = await Promise.all(Array.from(files).map(fileToBase64));
-    setNewProduct((prev) => ({
-      ...prev,
-      images: [...prev.images, ...imagesArray].slice(0, 3),
-    }));
-  };
-
-  const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      setNewProduct((prev) => ({
+        ...prev,
+        image: base64String, // Base64 formatına dönüştürülmüş resim
+      }));
+    };
+  
+    reader.readAsDataURL(file);
   };
 
   const handleAddProduct = () => {
@@ -164,7 +161,7 @@ const AddProductAddvertForm = () => {
     }
   
     const adData = {
-      adPhoto: newProduct.images[0], // İlan fotoğrafı
+      adPhoto: newProduct.image, // İlan fotoğrafı
       adTitle: newProduct.name, // İlan başlığı
       adDescription: newProduct.description, // İlan açıklaması
       budget: newProduct.budget, // Bütçe
@@ -194,7 +191,7 @@ const AddProductAddvertForm = () => {
       fromFloor: "",
       toFloor: "",
       deliveryDate: "",
-      images: [],
+      image: "",
     });
     setEditing(false);
   })
@@ -223,41 +220,33 @@ const AddProductAddvertForm = () => {
         <Divider />
         <CardContent sx={{ padding: "30px" }}>
           <form>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleImageChange}
-              id="image-upload"
-              style={{ display: "none" }}
-            />
-            <label htmlFor="image-upload">
-              <Button variant="contained" color="primary" component="span">
-                Resim Yükle
-              </Button>
-            </label>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 1,
-                marginTop: 1,
-              }}
-            >
-              {newProduct.images &&
-                newProduct.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`upload-${index}`}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                    }}
-                  />
-                ))}
+          <Box
+            component="form"
+            noValidate
+            autoComplete="off"
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          >
+            <Button variant="contained" component="label" size="small">
+              Resim Ekle
+              <input
+                type="file"
+                multiple
+                onChange={handleImageChange}
+                hidden
+              />
+            </Button>
             </Box>
+            <Box display="flex" justifyContent="center">
+  <img
+    src={newProduct.image} // Base64 formatındaki görsel
+    alt="Görsel"
+    style={{
+      width: "300px",
+      height: "auto",
+      objectFit: "cover",
+    }}
+  />
+</Box>
             <TextField
               id="product-name"
               label="Ürün Adı"
