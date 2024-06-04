@@ -11,6 +11,9 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -25,11 +28,20 @@ const SignUp = () => {
     username: "",
     email: "",
     password: "",
+    showPassword: false,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleClickShowPassword = () => {
+    setFormData({ ...formData, showPassword: !formData.showPassword });
+  };
+
+  const handleMouseDownPassword = (e) => {
+    e.preventDefault();
   };
 
   const handleSubmit = async () => {
@@ -93,11 +105,27 @@ const SignUp = () => {
                   fullWidth
                   name="password"
                   label="Şifre"
-                  type="password"
+                  type={formData.showPassword ? "text" : "password"}
                   id="password"
                   autoComplete="new-password"
                   value={formData.password}
                   onChange={handleChange}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Button
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {formData.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </Button>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </Grid>
             </Grid>
