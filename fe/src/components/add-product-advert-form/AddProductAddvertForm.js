@@ -133,7 +133,7 @@ const AddProductAddvertForm = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
-  
+
     reader.onloadend = () => {
       const base64String = reader.result;
       setNewProduct((prev) => ({
@@ -141,7 +141,7 @@ const AddProductAddvertForm = () => {
         image: base64String, // Base64 formatına dönüştürülmüş resim
       }));
     };
-  
+
     reader.readAsDataURL(file);
   };
 
@@ -159,7 +159,7 @@ const AddProductAddvertForm = () => {
       setSnackbarMessage("Lütfen tüm alanları doldurun");
       return;
     }
-  
+
     const adData = {
       adPhoto: newProduct.image, // İlan fotoğrafı
       adTitle: newProduct.name, // İlan başlığı
@@ -170,37 +170,40 @@ const AddProductAddvertForm = () => {
       productSpecialDate: newProduct.deliveryDate, // Teslim tarihi
       productSpecialStartCity: newProduct.fromCity, // Başlangıç şehri
       productSpecialEndCity: newProduct.toCity, // Varış şehri
-      productSpecialIsElevatorNeeded: newProduct.elevatorRequired === "yes" ? true : false, // Asansör gereksinimi
+      productSpecialIsElevatorNeeded:
+        newProduct.elevatorRequired === "yes" ? true : false, // Asansör gereksinimi
       productSpecialStartFloor: parseInt(newProduct.fromFloor), // Başlangıç katı
       productSpecialEndFloor: parseInt(newProduct.toFloor), // Varış katı
     };
-  
-    axios.post("http://localhost:3000/ads/add", adData)
-  .then(() => {
-    setSnackbarMessage("Ürün başarıyla eklendi");
-    setSnackbarOpen(true);
-    setNewProduct({
-      id: "",
-      name: "",
-      pname: "",
-      budget: "",
-      fromCity: "",
-      toCity: "",
-      description: "",
-      elevatorRequired: "no",
-      fromFloor: "",
-      toFloor: "",
-      deliveryDate: "",
-      image: "",
-    });
-    setEditing(false);
-  })
-  .catch(error => {
-    console.error(error.response.data.message); // Sunucudan gelen hata mesajı
-    setSnackbarMessage("Ürün eklenirken bir hata oluştu: " + error.response.data.message);
-    setSnackbarOpen(true);
-  });
 
+    axios
+      .post("http://localhost:3000/ads/add", adData)
+      .then(() => {
+        setSnackbarMessage("Ürün başarıyla eklendi");
+        setSnackbarOpen(true);
+        setNewProduct({
+          id: "",
+          name: "",
+          pname: "",
+          budget: "",
+          fromCity: "",
+          toCity: "",
+          description: "",
+          elevatorRequired: "no",
+          fromFloor: "",
+          toFloor: "",
+          deliveryDate: "",
+          image: "",
+        });
+        setEditing(false);
+      })
+      .catch((error) => {
+        console.error(error.response.data.message); // Sunucudan gelen hata mesajı
+        setSnackbarMessage(
+          "Ürün eklenirken bir hata oluştu: " + error.response.data.message
+        );
+        setSnackbarOpen(true);
+      });
   };
 
   const handleCloseSnackbar = () => {
@@ -220,33 +223,33 @@ const AddProductAddvertForm = () => {
         <Divider />
         <CardContent sx={{ padding: "30px" }}>
           <form>
-          <Box
-            component="form"
-            noValidate
-            autoComplete="off"
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-          >
-            <Button variant="contained" component="label" size="small">
-              Resim Ekle
-              <input
-                type="file"
-                multiple
-                onChange={handleImageChange}
-                hidden
-              />
-            </Button>
+            <Box
+              component="form"
+              noValidate
+              autoComplete="off"
+              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            >
+              <Button variant="contained" component="label" size="small">
+                Resim Ekle
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleImageChange}
+                  hidden
+                />
+              </Button>
             </Box>
             <Box display="flex" justifyContent="center">
-  <img
-    src={newProduct.image} // Base64 formatındaki görsel
-    alt="Görsel"
-    style={{
-      width: "300px",
-      height: "auto",
-      objectFit: "cover",
-    }}
-  />
-</Box>
+              <img
+                src={newProduct.image} // Base64 formatındaki görsel
+                alt="Görsel"
+                style={{
+                  width: "300px",
+                  height: "auto",
+                  objectFit: "cover",
+                }}
+              />
+            </Box>
             <TextField
               id="product-name"
               label="Ürün Adı"
