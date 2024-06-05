@@ -14,6 +14,11 @@ const User = sequelize.define('User', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    favoriteAds: {
+        type: DataTypes.JSON, // JSON type to store an array of numbers
+        allowNull: true,
+        defaultValue: []
     }
 }, {
     timestamps: true

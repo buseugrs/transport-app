@@ -27,14 +27,30 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
-  
+
   const logout = () => {
     setCurrentUser(null);
     // Kullanıcı oturum bilgilerini localStorage'den kaldır
     localStorage.removeItem("currentUser");
   };
 
-  // Diğer fonksiyonlar burada
+  const signup = async (username, email, password) => {
+    try {
+      const response = await axios.post("http://localhost:3000/users/create", {
+        email,
+        password,
+        username,
+      });
+      setCurrentUser({
+        email: response.data.email,
+        password: response.data.password,
+        username: response.data.username,
+      });
+    } catch (error) {
+      console.error("Signup failed:", error);
+      throw error;
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -42,10 +58,10 @@ export const AuthProvider = ({ children }) => {
         currentUser,
         login,
         logout,
+        signup,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
-
