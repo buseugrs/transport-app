@@ -238,7 +238,7 @@ const AddProductAddvertForm = () => {
                 />
               </Button>
             </Box>
-            {!newProduct.image === "" ? (
+            {newProduct.image  ? (
               <Box display="flex" justifyContent="center">
                 <img
                   src={newProduct.image} // Base64 formatındaki görsel

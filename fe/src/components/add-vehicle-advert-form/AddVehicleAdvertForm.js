@@ -228,7 +228,7 @@ const AddVehicleAdvertForm = () => {
               Resim Ekle
               <input type="file" multiple onChange={handleImageChange} hidden />
             </Button>
-            {!newListing.image === "" ? (
+            {newListing.image ? (
               <Box display="flex" justifyContent="center">
                 <img
                   src={newListing.image} // Base64 formatındaki görsel
