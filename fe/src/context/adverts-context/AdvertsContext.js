@@ -8,9 +8,6 @@ export const useAdverts = () => {
 
 export const AdvertsProvider = ({ children }) => {
   const [adverts, setAdverts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [favoriteAds, setFavoriteAds] = useState([]); // Sadece ilan ID'lerini saklayacak state
-  const [favoriteAdDetails, setFavoriteAdDetails] = useState([]); // Favori ilanların tam verilerini saklayacak state
   const [productAdverts, setProductAdverts] = useState([]);
   const [vehicleAdverts, setVehicleAdverts] = useState([]);
   const [allAdverts, setAllAdverts] = useState([]);
@@ -23,7 +20,6 @@ export const AdvertsProvider = ({ children }) => {
       setAllAdverts(data);
       setProductAdverts(data.filter((advert) => advert.isProduct === true));
       setVehicleAdverts(data.filter((advert) => advert.isProduct === false));
-      setLoading(false);
     } catch (error) {
       console.error("Veri alınamadı:", error);
     }
@@ -33,48 +29,15 @@ export const AdvertsProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    // Favori ilanları localStorage'dan al
-    const storedFavoriteAds =
-      JSON.parse(localStorage.getItem("favoriteAds")) || [];
-    setFavoriteAds(storedFavoriteAds);
-  }, []);
-
-  useEffect(() => {
-    // Favori ilanların tam verilerini al
-    const favoriteAdDetails = adverts.filter((ad) =>
-      favoriteAds.includes(ad.id)
-    );
-    setFavoriteAdDetails(favoriteAdDetails);
-  }, [adverts, favoriteAds]);
-
-  // Favori ilan ekleme ve kaldırma işlemleri
-  const handleToggleFavoriteAd = (advertId, isBookmarked) => {
-    if (isBookmarked) {
-      // Favori ilanları localStorage'da saklama
-      const updatedFavoriteAds = [...favoriteAds, advertId];
-      setFavoriteAds(updatedFavoriteAds);
-      localStorage.setItem("favoriteAds", JSON.stringify(updatedFavoriteAds));
-    } else {
-      const updatedFavoriteAds = favoriteAds.filter((id) => id !== advertId);
-      setFavoriteAds(updatedFavoriteAds);
-      localStorage.setItem("favoriteAds", JSON.stringify(updatedFavoriteAds));
-    }
-  };
-
   return (
     <AdvertsContext.Provider
       value={{
         adverts,
-        loading,
-        favoriteAds,
-        favoriteAdDetails,
-        handleToggleFavoriteAd,
         fetchData,
         productAdverts,
         vehicleAdverts,
         setAdverts,
-        allAdverts
+        allAdverts,
       }}
     >
       {children}

@@ -15,7 +15,7 @@ const checkUserPassword = async (req, res) => {
     try {
         const user = await User.findOne({ where: { email } });
         if (user && user.password === password) {
-            res.status(200).json({ message: 'Login successful' });
+            res.status(200).json(user);
         } else {
             res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -28,6 +28,7 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     try {
         const user = await User.findByPk(id);
+        console.log(user);
         if (user) {
             res.status(200).json(user);
         } else {
@@ -38,4 +39,40 @@ const getUser = async (req, res) => {
     }
 };
 
-module.exports = { createUser, checkUserPassword, getUser };
+const updateFavoriteAds = async (req, res) => {
+    const { username } = req.params;
+    const { favoriteAds } = req.body; // Array of favorite ad IDs
+
+    try {
+        const user = await User.findOne({ where: { username } });
+        if (user) {
+            user.favoriteAds = favoriteAds; // Update favoriteAds field
+            await user.save(); // Save changes
+            res.status(200).json({ message: 'Favorite ads updated successfully' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+const getFavoriteAds = async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const user = await User.findOne({ where: { username } });
+        if (user) {
+            const favoriteAds = user.favoriteAds;
+            res.status(200).json({ favoriteAds });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+module.exports = { createUser, checkUserPassword, getUser, updateFavoriteAds, getFavoriteAds };

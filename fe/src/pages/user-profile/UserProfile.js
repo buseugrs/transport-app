@@ -28,16 +28,14 @@ const Main = styled("main")(({ theme }) => ({
 const UserProfile = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
-  const { adverts, favoriteAds } = useAdverts(); // Destructure adverts and favoriteAds from the context
-  const { currentUser } = useAuth(); // Destructure currentUser from the context
+  const { adverts} = useAdverts(); // Destructure adverts and favoriteAds from the context
+  const { currentUser, favoriteAds } = useAuth(); // Destructure currentUser from the context
+  
 
   // Kullanıcı tarafından eklenen ilan sayısı
   const userAdCount = adverts.filter(
     (ad) => ad.userId === currentUser.id
   ).length;
-
-  // Kullanıcının favoriye eklediği ilan sayısı
-  const userFavoriteAdCount = favoriteAds.length;
 
   const handleListItemClick = (index) => {
     setActiveIndex(index);
@@ -102,7 +100,6 @@ const UserProfile = () => {
                 "&:hover": { backgroundColor: "#f0f8ff", color: "#438ed8" },
               }}
             >
-              <ListItemText primary />
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -177,9 +174,12 @@ const UserProfile = () => {
                     <Typography variant="h6" color={"#6990ad"}>
                       İlan Adedi
                     </Typography>
-                    <Typography variant="h4" color={"#6990ad"}>
-                      {userFavoriteAdCount}
-                    </Typography>
+                    {favoriteAds ? (<Typography variant="h4" color={"#6990ad"}>
+                      {favoriteAds.length}
+                    </Typography>) :
+                    0
+                    }
+                    
                   </Box>
                 </Box>
               </Paper>

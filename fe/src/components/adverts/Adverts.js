@@ -12,23 +12,19 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import Button from "@mui/joy/Button";
 
 const Adverts = ({ advert }) => {
-  const { currentUser } = useAuth();
-  const { handleToggleFavoriteAd, favoriteAds } = useAdverts(); // Favori ilanları ve toggle fonksiyonunu kullanıyoruz
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } = useAuth();
 
-  useEffect(() => {
-    // İlanın favorilere eklenip eklenmediğini kontrol et
-    setIsBookmarked(favoriteAds.includes(advert.id));
-  }, [favoriteAds, advert.id]);
-
-  // İlanın favoriye eklenip çıkarılmasını yöneten fonksiyon
-  const handleBookmarkToggle = () => {
-    setIsBookmarked((prev) => {
-      const newBookmarkState = !prev;
-      // Kullanıcının favoriye eklemesi/kaldırması
-      handleToggleFavoriteAd(advert.id, newBookmarkState);
-      return newBookmarkState;
-    });
+  const handleFavoriteIconClick = () => {
+    if (favoriteAds && favoriteAds.includes(advert.id)) {
+      // Eğer ilan favorilerde ise, kaldır
+      const updatedFavoriteAds = favoriteAds.filter((id) => id !== advert.id);
+      updateFavoriteAds(currentUser.username, updatedFavoriteAds);
+    } else {
+      // Eğer ilan favorilerde değilse, ekle
+      const updatedFavoriteAds = [...favoriteAds, advert.id];
+      updateFavoriteAds(currentUser.username, updatedFavoriteAds);
+    }
+    getFavoriteAds(currentUser.username);
   };
 
   return (
@@ -50,13 +46,13 @@ const Adverts = ({ advert }) => {
         {currentUser && (
           <IconButton
             aria-label={`bookmark ${advert.adTitle}`}
+            onClick={handleFavoriteIconClick}
             variant="plain"
-            color={isBookmarked ? "primary" : "neutral"} // Favoriye eklenmişse renk değiştir
+            color={favoriteAds && favoriteAds.includes(advert.id) ? "primary" : "neutral"} // Favoriye eklenmişse renk değiştir
             size="sm"
-            onClick={handleBookmarkToggle} // Tıklama olayı
             sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
           >
-            {isBookmarked ? <BookmarkRemove /> : <BookmarkAdd />}
+            {favoriteAds && favoriteAds.includes(advert.id) ? <BookmarkRemove /> : <BookmarkAdd />}
           </IconButton>
         )}
       </div>
