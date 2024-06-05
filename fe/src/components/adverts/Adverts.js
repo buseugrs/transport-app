@@ -72,7 +72,7 @@ const Adverts = ({ advert }) => {
           aria-label={`Explore ${advert.adTitle}`}
           sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
         >
-          Explore
+          İlanı İncele
         </Button>
       </CardContent>
     </Card>
