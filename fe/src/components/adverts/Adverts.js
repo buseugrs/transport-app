@@ -32,7 +32,7 @@ const Adverts = ({ advert }) => {
   };
 
   return (
-    <Card sx={{ width: 320, marginTop: 0 }}>
+    <Card sx={{ width: 320, marginTop: 0 ,height:400, position:"relative"}}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Typography
           level="title-lg"
@@ -98,7 +98,7 @@ const Adverts = ({ advert }) => {
           size="md"
           color="primary"
           aria-label={`Explore ${advert.adTitle}`}
-          sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
+          sx={{ ml: "auto", alignSelf: "center", fontWeight: 600, position:"absolute", bottom:"1rem", right:"1rem"}}
         >
           İlanı İncele
         </Button>
