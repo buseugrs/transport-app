@@ -51,6 +51,16 @@ const UserProfile = () => {
     navigate("/arac-ilani-ekle");
   };
 
+  const handleNavigateListItems = (index) => {
+    if (index === 0) {
+      navigate("/profil");
+    } else if (index === 1) {
+      navigate("/ilanlarim");
+    } else {
+      navigate("/favori-ilanlarim");
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -80,7 +90,10 @@ const UserProfile = () => {
           {["Özet", "İlanlarım", "Favori İlanlar"].map((text, index) => (
             <ListItem
               key={text}
-              onClick={() => handleListItemClick(index)}
+              onClick={() => {
+                handleListItemClick(index);
+                handleNavigateListItems(index);
+              }}
               sx={{
                 cursor: "pointer",
                 color: index === activeIndex ? "#438ed8" : "initial",
