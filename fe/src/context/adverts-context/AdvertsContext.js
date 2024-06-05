@@ -10,6 +10,7 @@ export const AdvertsProvider = ({ children }) => {
 
   const [adverts, setAdverts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favoriteAds, setFavoriteAds] = useState([]); // Favori ilanları saklayacak state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,8 +28,28 @@ export const AdvertsProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    // Favori ilanları localStorage'dan al
+    const storedFavoriteAds = JSON.parse(localStorage.getItem("favoriteAds")) || [];
+    setFavoriteAds(storedFavoriteAds);
+  }, []);
+
+  // Favori ilan ekleme ve kaldırma işlemleri
+  const handleToggleFavoriteAd = (advertId, isBookmarked) => {
+    if (isBookmarked) {
+      // Favori ilanları localStorage'da saklama
+      const updatedFavoriteAds = [...favoriteAds, advertId];
+      setFavoriteAds(updatedFavoriteAds);
+      localStorage.setItem("favoriteAds", JSON.stringify(updatedFavoriteAds));
+    } else {
+      const updatedFavoriteAds = favoriteAds.filter((id) => id !== advertId);
+      setFavoriteAds(updatedFavoriteAds);
+      localStorage.setItem("favoriteAds", JSON.stringify(updatedFavoriteAds));
+    }
+  };
+
   return (
-    <AdvertsContext.Provider value={adverts}>
+    <AdvertsContext.Provider value={{ adverts, loading, favoriteAds, handleToggleFavoriteAd }}>
       {!loading && children}
     </AdvertsContext.Provider>
   );

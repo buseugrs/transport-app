@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAdverts } from "../../context/adverts-context/AdvertsContext";
+import { useAuth } from "../../context/auth-context/AuthContext";
 
 import {
   Box,
@@ -26,16 +28,28 @@ const Main = styled("main")(({ theme }) => ({
 const UserProfile = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
+  const { adverts } = useAdverts(); // Destructure adverts from the context
+  const { currentUser } = useAuth(); // Destructure currentUser from the context
+  const { favoriteAds } = useAdverts(); // Favori ilanları buradan alınabilir
+
+  // Kullanıcı tarafından eklenen ilan sayısı
+  const userAdCount = adverts.filter(
+    (ad) => ad.userId === currentUser.id
+  ).length;
+
+  // Kullanıcının favoriye eklediği ilan sayısı
+  const userFavoriteAdCount = favoriteAds.length;
 
   const handleListItemClick = (index) => {
     setActiveIndex(index);
   };
 
-  const handleAddProductAdvert = (index) => {
+
+  const handleAddProductAdvert = () => {
     navigate("/add-product-advert");
   };
 
-  const handleAddVehicleAdvert = (index) => {
+  const handleAddVehicleAdvert = () => {
     navigate("/add-vehicle-advert");
   };
 
@@ -88,7 +102,12 @@ const UserProfile = () => {
             <Grid item xs={12} md={6}>
               <Paper
                 elevation={3}
-                sx={{ height: "100%", padding: 2, textAlign: "center", borderRadius: 2 }}
+                sx={{
+                  height: "100%",
+                  padding: 2,
+                  textAlign: "center",
+                  borderRadius: 2,
+                }}
               >
                 <Box
                   sx={{
@@ -106,7 +125,7 @@ const UserProfile = () => {
                       İlan Adedi
                     </Typography>
                     <Typography variant="h4" color={"#6990ad"}>
-                      10
+                      {userAdCount}
                     </Typography>
                   </Box>
                 </Box>
@@ -115,7 +134,12 @@ const UserProfile = () => {
             <Grid item xs={12} md={6}>
               <Paper
                 elevation={3}
-                sx={{ height: "100%", padding: 2, textAlign: "center", borderRadius: 2 }}
+                sx={{
+                  height: "100%",
+                  padding: 2,
+                  textAlign: "center",
+                  borderRadius: 2,
+                }}
               >
                 <Box
                   sx={{
@@ -126,14 +150,14 @@ const UserProfile = () => {
                 >
                   <StarBorderIcon sx={{ fontSize: 80, color: "#6990ad" }} />
                   <Box ml={1}>
-                    <Typography variant="h6" color={"#6990ad"}>
+                  <Typography variant="h6" color={"#6990ad"}>
                       Favorilere Eklenen
                     </Typography>
                     <Typography variant="h6" color={"#6990ad"}>
                       İlan Adedi
                     </Typography>
                     <Typography variant="h4" color={"#6990ad"}>
-                      5
+                      {userAdCount}
                     </Typography>
                   </Box>
                 </Box>
@@ -141,7 +165,10 @@ const UserProfile = () => {
             </Grid>
           </Grid>
           <Grid item xs={12}>
-            <Paper elevation={3} sx={{ padding: 2, textAlign: "center", borderRadius: 2 }}>
+            <Paper
+              elevation={3}
+              sx={{ padding: 2, textAlign: "center", borderRadius: 2 }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -155,8 +182,8 @@ const UserProfile = () => {
                   Hemen İlan Ver
                 </Typography>
                 <Typography variant="body1" gutterBottom>
-                  İlanınızın milyonlarca kullanıcı tarafından
-                  görüntülenmesini sağlayarak kısa sürede sonuca ulaşın.
+                  İlanınızın milyonlarca kullanıcı tarafından görüntülenmesini
+                  sağlayarak kısa sürede sonuca ulaşın.
                 </Typography>
               </Box>
               <Box textAlign="center" mt={2}>
@@ -168,7 +195,11 @@ const UserProfile = () => {
                 >
                   Eşya İlanı Ver
                 </Button>
-                <Button onClick={handleAddVehicleAdvert} variant="contained" color="primary">
+                <Button
+                  onClick={handleAddVehicleAdvert}
+                  variant="contained"
+                  color="primary"
+                >
                   Araç İlanı Ver
                 </Button>
               </Box>

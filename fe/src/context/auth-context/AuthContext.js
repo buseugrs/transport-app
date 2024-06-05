@@ -6,7 +6,11 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(() => {
+    // Sayfa yenilendiğinde localStorage'den oturum durumunu al
+    const storedUser = localStorage.getItem("currentUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   const login = async (email, password) => {
     try {
@@ -14,34 +18,23 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
-      setCurrentUser({ email: response.data.email });
+      const userData = { email: response.data.email };
+      setCurrentUser(userData);
+      // Kullanıcı oturum bilgilerini localStorage'e kaydet
+      localStorage.setItem("currentUser", JSON.stringify(userData));
     } catch (error) {
       console.error("Login failed:", error);
       throw error;
     }
   };
-
+  
   const logout = () => {
     setCurrentUser(null);
+    // Kullanıcı oturum bilgilerini localStorage'den kaldır
+    localStorage.removeItem("currentUser");
   };
 
-  const signup = async (username, email, password) => {
-    try {
-      const response = await axios.post("http://localhost:3000/users/create", {
-        username,
-        email,
-        password,
-      });
-      setCurrentUser({
-        username: response.data.username,
-        email: response.data.email,
-        password: response.data.password,
-      });
-    } catch (error) {
-      console.error("Signup failed:", error);
-      throw error;
-    }
-  };
+  // Diğer fonksiyonlar burada
 
   return (
     <AuthContext.Provider
@@ -49,10 +42,11 @@ export const AuthProvider = ({ children }) => {
         currentUser,
         login,
         logout,
-        signup,
+        // Diğer fonksiyonlar burada
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+

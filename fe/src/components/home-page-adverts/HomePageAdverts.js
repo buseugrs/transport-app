@@ -4,9 +4,9 @@ import Adverts from '../adverts/Adverts';
 import { useAdverts } from '../../context/adverts-context/AdvertsContext';
 
 const HomePageAdverts = () => {
-  const adverts = useAdverts();
+  const { adverts } = useAdverts(); // Destructure the adverts array from the context
 
-  if (adverts) {
+  if (adverts && adverts.length > 0) { // Check if adverts is not empty and is an array
     return (
       <Grid container spacing={2}>
         {adverts.map((advert) => (
@@ -19,7 +19,6 @@ const HomePageAdverts = () => {
   } else {
     return "Loading";
   }
-
 }
 
 export default HomePageAdverts;
