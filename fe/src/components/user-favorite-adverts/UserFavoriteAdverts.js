@@ -5,16 +5,16 @@ import { useAdverts } from "../../context/adverts-context/AdvertsContext";
 import { Grid } from "@mui/material";
 import Adverts from "../adverts/Adverts";
 
-const UserAdverts = () => {
+const UserFavoriteAdverts = () => {
+  const { favoriteAdDetails } = useAdverts(); // Favori ilanların tam verilerini al
   const { currentUser } = useAuth();
-  const { adverts } = useAdverts();
 
-  // Kullanıcının sahibi olduğu ilanları filtrele
-  const userAdverts = adverts.filter(
+  // Kullanıcının favori ilanlarını filtrele
+  const userFavoriteAdverts = favoriteAdDetails.filter(
     (advert) => advert.userId === currentUser.id
   );
 
-  return userAdverts.map((advert) => (
+  return userFavoriteAdverts.map((advert) => (
     <Grid
       item
       xs={12}
@@ -31,4 +31,4 @@ const UserAdverts = () => {
   ));
 };
 
-export default UserAdverts;
+export default UserFavoriteAdverts;
