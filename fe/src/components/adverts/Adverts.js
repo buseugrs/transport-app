@@ -64,13 +64,14 @@ const Adverts = ({ advert }) => {
         <img src={advert.adPhoto} loading="lazy" alt={advert.adTitle} />
       </AspectRatio>
       <CardContent orientation="vertical">
-        <div>
-          <Typography level="body-md" fontWeight={900}>
-            {advert.budget} TL
-          </Typography>
-        </div>
         {advert.isProduct ? (
           <div>
+            <Typography level="body-md" fontWeight={900}>
+              Eşya İlanı
+            </Typography>
+            <Typography level="body-md" fontWeight={900}>
+              {advert.budget} TL
+            </Typography>
             <Typography level="body-md">
               Alınacak Şehir:{advert.productSpecialStartCity}
             </Typography>
@@ -80,11 +81,18 @@ const Adverts = ({ advert }) => {
           </div>
         ) : (
           <div>
+            <Typography level="body-md" fontWeight={900}>
+              Araç İlanı
+            </Typography>
+            <Typography level="body-md" fontWeight={900}>
+              {advert.budget} TL
+            </Typography>
             <Typography level="body-md">
               Hizmet Verilen Şehirler: {advert.vehicleSpecialServiceCities}
             </Typography>
           </div>
         )}
+
         <Button
           variant="solid"
           size="md"
