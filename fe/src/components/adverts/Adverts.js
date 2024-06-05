@@ -63,9 +63,14 @@ const Adverts = ({ advert }) => {
       <AspectRatio minHeight="120px" maxHeight="200px">
         <img src={advert.adPhoto} loading="lazy" alt={advert.adTitle} />
       </AspectRatio>
-      <CardContent orientation="horizontal">
+      <CardContent orientation="vertical">
+      {advert.isProduct && (
+            <Typography level="body-md" fontWeight={900}>
+              {advert.productSpecialStartCity} - {advert.productSpecialEndCity}
+            </Typography>
+          )}
         <div>
-          <Typography level="body-xs">Total price:</Typography>
+          <Typography level="body-md" fontWeight={900}>{advert.budget} TL</Typography>
           <Typography fontSize="lg" fontWeight="lg">
             {advert.price}
           </Typography>

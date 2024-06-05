@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const AdvertsContext = createContext();
 
@@ -12,31 +12,34 @@ export const AdvertsProvider = ({ children }) => {
   const [favoriteAds, setFavoriteAds] = useState([]); // Sadece ilan ID'lerini saklayacak state
   const [favoriteAdDetails, setFavoriteAdDetails] = useState([]); // Favori ilanların tam verilerini saklayacak state
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/ads/');
-        const data = await response.json();
-        console.log(data);
-        setAdverts(data);
-        setLoading(false); 
-      } catch (error) {
-        console.error('Veri alınamadı:', error);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/ads/");
+      const data = await response.json();
+      console.log(data);
+      setAdverts(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
     // Favori ilanları localStorage'dan al
-    const storedFavoriteAds = JSON.parse(localStorage.getItem("favoriteAds")) || [];
+    const storedFavoriteAds =
+      JSON.parse(localStorage.getItem("favoriteAds")) || [];
     setFavoriteAds(storedFavoriteAds);
   }, []);
 
   useEffect(() => {
     // Favori ilanların tam verilerini al
-    const favoriteAdDetails = adverts.filter((ad) => favoriteAds.includes(ad.id));
+    const favoriteAdDetails = adverts.filter((ad) =>
+      favoriteAds.includes(ad.id)
+    );
     setFavoriteAdDetails(favoriteAdDetails);
   }, [adverts, favoriteAds]);
 
@@ -57,7 +60,16 @@ export const AdvertsProvider = ({ children }) => {
   console.log(favoriteAds);
 
   return (
-    <AdvertsContext.Provider value={{ adverts, loading, favoriteAds, favoriteAdDetails, handleToggleFavoriteAd }}>
+    <AdvertsContext.Provider
+      value={{
+        adverts,
+        loading,
+        favoriteAds,
+        favoriteAdDetails,
+        handleToggleFavoriteAd,
+        fetchData
+      }}
+    >
       {!loading && children}
     </AdvertsContext.Provider>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAdverts } from "../../context/adverts-context/AdvertsContext";
 import axios from "axios";
 import {
   Card,
@@ -22,6 +23,7 @@ import {
 const initialProducts = [];
 
 const AddProductAddvertForm = () => {
+  const {fetchData} = useAdverts();
   const [products, setProducts] = useState(initialProducts);
   const [newProduct, setNewProduct] = useState({
     id: "",
@@ -196,6 +198,7 @@ const AddProductAddvertForm = () => {
           image: "",
         });
         setEditing(false);
+        fetchData();
       })
       .catch((error) => {
         console.error(error.response.data.message); // Sunucudan gelen hata mesajı

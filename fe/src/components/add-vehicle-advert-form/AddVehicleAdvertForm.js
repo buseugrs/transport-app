@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
+import { useAdverts } from "../../context/adverts-context/AdvertsContext";
+
 import {
   Typography,
   Box,
@@ -24,6 +26,7 @@ import {
 const initialProducts = [];
 
 const AddVehicleAdvertForm = () => {
+  const { fetchData } = useAdverts();
   const [products, setProducts] = useState(initialProducts);
   const [newListing, setNewListing] = useState({
     id: "",
@@ -145,7 +148,7 @@ const AddVehicleAdvertForm = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
-  
+
     reader.onloadend = () => {
       const base64String = reader.result;
       setNewListing((prev) => ({
@@ -153,12 +156,12 @@ const AddVehicleAdvertForm = () => {
         image: base64String, // Base64 formatına dönüştürülmüş resim
       }));
     };
-  
+
     reader.readAsDataURL(file);
   };
 
-const handleAddListing = async () => {
-  console.log("handleAddListing");
+  const handleAddListing = async () => {
+    console.log("handleAddListing");
     if (
       newListing.name === "" ||
       newListing.post === "" ||
@@ -171,7 +174,6 @@ const handleAddListing = async () => {
       setSnackbarMessage("Lütfen tüm alanları doldurun");
       return;
     }
-  
 
     const adData = {
       adPhoto: newListing.image, // İlan fotoğrafı
@@ -181,10 +183,11 @@ const handleAddListing = async () => {
       isProduct: false, // Araç ilanı olduğunu belirtiyoruz
       vehicleSpecialLicensePlate: newListing.post,
       vehicleSpecialType: newListing.pname,
-      vehicleSpecialServiceCities: newListing.selectedCities.toString()
+      vehicleSpecialServiceCities: newListing.selectedCities.toString(),
     };
-    
-    axios.post("http://localhost:3000/ads/add", adData)
+
+    axios
+      .post("http://localhost:3000/ads/add", adData)
       .then(() => {
         setSnackbarMessage("Ürün başarıyla eklendi");
         setSnackbarOpen(true);
@@ -199,17 +202,21 @@ const handleAddListing = async () => {
           description: "",
           image: "",
         });
+        setEditing(false);
+        fetchData();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error.response.data.message); // Sunucudan gelen hata mesajı
-        setSnackbarMessage("Ürün eklenirken bir hata oluştu: " + error.response.data.message);
+        setSnackbarMessage(
+          "Ürün eklenirken bir hata oluştu: " + error.response.data.message
+        );
         setSnackbarOpen(true);
       });
-}
+  };
 
-const handleCloseSnackbar = () => {
-  setSnackbarOpen(false);
-};
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
 
   return (
     <Box>
@@ -231,24 +238,19 @@ const handleCloseSnackbar = () => {
           >
             <Button variant="contained" component="label" size="small">
               Resim Ekle
-              <input
-                type="file"
-                multiple
-                onChange={handleImageChange}
-                hidden
-              />
+              <input type="file" multiple onChange={handleImageChange} hidden />
             </Button>
             <Box display="flex" justifyContent="center">
-  <img
-    src={newListing.image} // Base64 formatındaki görsel
-    alt="Görsel"
-    style={{
-      width: "300px",
-      height: "auto",
-      objectFit: "cover",
-    }}
-  />
-</Box>
+              <img
+                src={newListing.image} // Base64 formatındaki görsel
+                alt="Görsel"
+                style={{
+                  width: "300px",
+                  height: "auto",
+                  objectFit: "cover",
+                }}
+              />
+            </Box>
 
             <TextField
               label="Firma Adı"
