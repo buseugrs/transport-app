@@ -5,12 +5,6 @@ import { useAdverts } from "../../context/adverts-context/AdvertsContext";
 import {
   Typography,
   Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Chip,
   TextField,
   Button,
   Snackbar,
@@ -41,9 +35,7 @@ const AddVehicleAdvertForm = () => {
   });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [submittedListing, setSubmittedListing] = useState(null);
   const [editing, setEditing] = useState(false);
-  const [expandedDescription, setExpandedDescription] = useState(null);
 
   const citiesInTurkey = [
     "Tüm iller",
@@ -163,6 +155,7 @@ const AddVehicleAdvertForm = () => {
   const handleAddListing = async () => {
     console.log("handleAddListing");
     if (
+      newListing.image === "" ||
       newListing.name === "" ||
       newListing.post === "" ||
       newListing.pname === "" ||
@@ -230,28 +223,28 @@ const AddVehicleAdvertForm = () => {
         </Box>
         <Divider />
         <CardContent sx={{ padding: "30px" }}>
-          <Box
-            component="form"
-            noValidate
-            autoComplete="off"
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-          >
-            <Button variant="contained" component="label" size="small">
+          <Box component="form" noValidate autoComplete="off">
+            <Button variant="contained" component="label">
               Resim Ekle
               <input type="file" multiple onChange={handleImageChange} hidden />
             </Button>
-            <Box display="flex" justifyContent="center">
-              <img
-                src={newListing.image} // Base64 formatındaki görsel
-                alt="Görsel"
-                style={{
-                  width: "300px",
-                  height: "auto",
-                  objectFit: "cover",
-                }}
-              />
-            </Box>
-
+            {!newListing.image === "" ? (
+              <Box display="flex" justifyContent="center">
+                <img
+                  src={newListing.image} // Base64 formatındaki görsel
+                  alt="Görsel"
+                  style={{
+                    width: "300px",
+                    height: "auto",
+                    objectFit: "cover",
+                  }}
+                />
+              </Box>
+            ) : (
+              <Box display="flex" justifyContent="center">
+                <br />
+              </Box>
+            )}
             <TextField
               label="Firma Adı"
               name="name"

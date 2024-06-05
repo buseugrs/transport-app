@@ -228,7 +228,7 @@ const AddProductAddvertForm = () => {
         <CardContent sx={{ padding: "30px" }}>
           <form noValidate autoComplete="off">
             <Box>
-              <Button variant="contained" component="label" size="small">
+              <Button variant="contained" component="label">
                 Resim Ekle
                 <input
                   type="file"
