@@ -21,7 +21,6 @@ const initialProducts = [];
 
 const AddVehicleAdvertForm = () => {
   const { fetchData } = useAdverts();
-  const [products, setProducts] = useState(initialProducts);
   const [newListing, setNewListing] = useState({
     id: "",
     name: "",

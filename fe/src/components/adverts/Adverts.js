@@ -10,9 +10,12 @@ import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkRemove from "@mui/icons-material/BookmarkRemoveOutlined";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Button from "@mui/joy/Button";
+import StarIcon from '@mui/icons-material/Star';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 const Adverts = ({ advert }) => {
-  const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } = useAuth();
+  const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } =
+    useAuth();
 
   const handleFavoriteIconClick = () => {
     if (favoriteAds && favoriteAds.includes(advert.id)) {
@@ -28,7 +31,7 @@ const Adverts = ({ advert }) => {
   };
 
   return (
-    <Card sx={{ width: 320, marginTop: 0 ,height:400, position:"relative"}}>
+    <Card sx={{ width: 320, marginTop: 0, height: 400, position: "relative" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Typography
           level="title-lg"
@@ -48,11 +51,15 @@ const Adverts = ({ advert }) => {
             aria-label={`bookmark ${advert.adTitle}`}
             onClick={handleFavoriteIconClick}
             variant="plain"
-            color={favoriteAds && favoriteAds.includes(advert.id) ? "primary" : "neutral"} // Favoriye eklenmişse renk değiştir
+       // Favoriye eklenmişse renk değiştir
             size="sm"
             sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
           >
-            {favoriteAds && favoriteAds.includes(advert.id) ? <BookmarkRemove /> : <BookmarkAdd />}
+   {favoriteAds && favoriteAds.includes(advert.id) ? (
+    <StarIcon sx={{ color: 'orange' }} />
+  ) : (
+    <StarOutlineIcon />
+  )}
           </IconButton>
         )}
       </div>
@@ -94,7 +101,14 @@ const Adverts = ({ advert }) => {
           size="md"
           color="primary"
           aria-label={`Explore ${advert.adTitle}`}
-          sx={{ ml: "auto", alignSelf: "center", fontWeight: 600, position:"absolute", bottom:"1rem", right:"1rem"}}
+          sx={{
+            ml: "auto",
+            alignSelf: "center",
+            fontWeight: 600,
+            position: "absolute",
+            bottom: "1rem",
+            right: "1rem",
+          }}
         >
           İlanı İncele
         </Button>
