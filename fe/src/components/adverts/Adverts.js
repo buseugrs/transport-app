@@ -32,8 +32,8 @@ const Adverts = ({ advert }) => {
   };
 
   return (
-    <Card sx={{ width: 320, marginTop: 0}}>
-      <div style={{ display: "flex", alignItems: "center"}}>
+    <Card sx={{ width: 320, marginTop: 0 }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <Typography
           level="title-lg"
           sx={{
@@ -64,17 +64,27 @@ const Adverts = ({ advert }) => {
         <img src={advert.adPhoto} loading="lazy" alt={advert.adTitle} />
       </AspectRatio>
       <CardContent orientation="vertical">
-      {advert.isProduct && (
-            <Typography level="body-md" fontWeight={900}>
-              {advert.productSpecialStartCity} - {advert.productSpecialEndCity}
-            </Typography>
-          )}
         <div>
-          <Typography level="body-md" fontWeight={900}>{advert.budget} TL</Typography>
-          <Typography fontSize="lg" fontWeight="lg">
-            {advert.price}
+          <Typography level="body-md" fontWeight={900}>
+            {advert.budget} TL
           </Typography>
         </div>
+        {advert.isProduct ? (
+          <div>
+            <Typography level="body-md">
+              Alınacak Şehir:{advert.productSpecialStartCity}
+            </Typography>
+            <Typography level="body-md">
+              Bırakılacak Şehir:{advert.productSpecialStartCity}
+            </Typography>
+          </div>
+        ) : (
+          <div>
+            <Typography level="body-md">
+              Hizmet Verilen Şehirler: {advert.vehicleSpecialServiceCities}
+            </Typography>
+          </div>
+        )}
         <Button
           variant="solid"
           size="md"
