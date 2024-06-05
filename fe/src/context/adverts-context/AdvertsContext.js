@@ -11,6 +11,9 @@ export const AdvertsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [favoriteAds, setFavoriteAds] = useState([]); // Sadece ilan ID'lerini saklayacak state
   const [favoriteAdDetails, setFavoriteAdDetails] = useState([]); // Favori ilanların tam verilerini saklayacak state
+  const [productAdverts, setProductAdverts] = useState([]);
+  const [vehicleAdverts, setVehicleAdverts] = useState([]);
+  const [allAdverts, setAllAdverts] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -18,6 +21,9 @@ export const AdvertsProvider = ({ children }) => {
       const data = await response.json();
       console.log(data);
       setAdverts(data);
+      setAllAdverts(data);
+      setProductAdverts(data.filter((advert) => advert.isProduct === true));
+      setVehicleAdverts(data.filter((advert) => advert.isProduct === false));
       setLoading(false);
     } catch (error) {
       console.error("Veri alınamadı:", error);
@@ -67,7 +73,11 @@ export const AdvertsProvider = ({ children }) => {
         favoriteAds,
         favoriteAdDetails,
         handleToggleFavoriteAd,
-        fetchData
+        fetchData,
+        productAdverts,
+        vehicleAdverts,
+        setAdverts,
+        allAdverts
       }}
     >
       {!loading && children}

@@ -7,7 +7,6 @@ const UserAdvertsPage = () => {
     <Grid
     container
     spacing={2}
-    border={"1px solid red"}
     marginTop={0}
     padding={"2rem"}
   >
