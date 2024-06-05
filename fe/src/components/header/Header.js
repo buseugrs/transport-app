@@ -66,84 +66,87 @@ const Header = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        position="static"
-        sx={{ backgroundColor: "#3f475f", boxShadow: "none" }}
-      >
-        <Toolbar>
-          <Typography
-            onClick={handleLogoClick}
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              display: { xs: "none", sm: "flex" },
-              alignItems: "center",
-              cursor: "pointer",
-            }}
-          >
-            <Box mr={1} display={"flex"} alignItems={"baseline"}>
-              <img src={logoIcon} alt="flexy" />
-            </Box>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "#3f475f", boxShadow: "none" }}
+    >
+      <Toolbar sx={{ justifyContent: 'space-between' }}> {/* Toolbar'un içeriğini ortalamak için */}
+        <Typography
+          onClick={handleLogoClick}
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{
+            display: { xs: "flex", sm: "flex" },
+            alignItems: "center",
+            cursor: "pointer",
+          }}
+        >
+          <Box mr={1}>
+            <img src={logoIcon} alt="flexy" />
+          </Box>
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <img src={logoText} alt="flexy" width={100} />
-          </Typography>
-
-          <RadioButtons />
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {currentUser ? (
-              <>
-                <IconButton
-                  size="large"
-                  aria-label="show 4 new mails"
-                  sx={{ color: "black" }}
-                >
-                  <Badge badgeContent={4} color="error">
-                    <MailIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  sx={{ color: "black" }}
-                >
-                  <Typography sx={{ color: "white" }}>
-                    {currentUser.username}
-                  </Typography>
-                </IconButton>
-              </>
-            ) : (
-              <>
-                <MenuItem component={Link} to="/giris" sx={{ color: "white" }}>
-                  Giriş Yap
-                </MenuItem>
-                <MenuItem component={Link} to="/kayit" sx={{ color: "white" }}>
-                  Hesap Aç
-                </MenuItem>
-              </>
-            )}
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              sx={{ color: "black" }}
-              onClick={handleProfileMenuOpen}
-
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMenu}
-    </Box>
+        </Typography>
+  
+        <RadioButtons /> 
+  
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          {currentUser ? (
+            <>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                sx={{ color: "black" }}
+              >
+                <Badge badgeContent={4} color="error">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                sx={{ color: "black" }}
+              >
+                <Typography sx={{ color: "white" }}>
+                  {currentUser.username}
+                </Typography>
+              </IconButton>
+            </>
+          ) : (
+            <>
+              <MenuItem component={Link} to="/giris" sx={{ color: "white" }}>
+                Giriş Yap
+              </MenuItem>
+              <MenuItem component={Link} to="/kayit" sx={{ color: "white" }}>
+                Hesap Aç
+              </MenuItem>
+            </>
+          )}
+        </Box>
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <IconButton
+            size="large"
+            aria-label="show more"
+            aria-controls={mobileMenuId}
+            aria-haspopup="true"
+            sx={{ color: "black" }}
+            onClick={handleProfileMenuOpen}
+          >
+            <MoreIcon />
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
+    {renderMenu}
+  </Box>
+  
+  
   );
 };
 
