@@ -119,6 +119,10 @@ const UserProfile = () => {
                   padding: 2,
                   textAlign: "center",
                   borderRadius: 2,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate("/ilanlarim");
                 }}
               >
                 <Box
@@ -151,6 +155,10 @@ const UserProfile = () => {
                   padding: 2,
                   textAlign: "center",
                   borderRadius: 2,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate("/favori-ilanlarim");
                 }}
               >
                 <Box
