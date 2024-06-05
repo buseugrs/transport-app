@@ -23,8 +23,7 @@ import {
 const initialProducts = [];
 
 const AddProductAddvertForm = () => {
-  const {fetchData} = useAdverts();
-  const [products, setProducts] = useState(initialProducts);
+  const { fetchData } = useAdverts();
   const [newProduct, setNewProduct] = useState({
     id: "",
     name: "",
@@ -148,7 +147,9 @@ const AddProductAddvertForm = () => {
   };
 
   const handleAddProduct = () => {
+    console.log(newProduct);
     if (
+      newProduct.image === "" ||
       newProduct.name === "" ||
       newProduct.pname === "" ||
       newProduct.budget === "" ||
@@ -225,13 +226,8 @@ const AddProductAddvertForm = () => {
         </Box>
         <Divider />
         <CardContent sx={{ padding: "30px" }}>
-          <form>
-            <Box
-              component="form"
-              noValidate
-              autoComplete="off"
-              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-            >
+          <form noValidate autoComplete="off">
+            <Box>
               <Button variant="contained" component="label" size="small">
                 Resim Ekle
                 <input
@@ -242,17 +238,23 @@ const AddProductAddvertForm = () => {
                 />
               </Button>
             </Box>
-            <Box display="flex" justifyContent="center">
-              <img
-                src={newProduct.image} // Base64 formatındaki görsel
-                alt="Görsel"
-                style={{
-                  width: "300px",
-                  height: "auto",
-                  objectFit: "cover",
-                }}
-              />
-            </Box>
+            {!newProduct.image === "" ? (
+              <Box display="flex" justifyContent="center">
+                <img
+                  src={newProduct.image} // Base64 formatındaki görsel
+                  alt="Görsel"
+                  style={{
+                    width: "300px",
+                    height: "auto",
+                    objectFit: "cover",
+                  }}
+                />
+              </Box>
+            ) : (
+              <Box display="flex" justifyContent="center">
+                <br />
+              </Box>
+            )}
             <TextField
               id="product-name"
               label="Ürün Adı"

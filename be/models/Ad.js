@@ -4,7 +4,7 @@ const sequelize = require('../config/db');
 const Ad = sequelize.define('Ad', {
     adPhoto: {
         type: DataTypes.TEXT('long'),
-        allowNull: true
+        allowNull: false
     },
     adTitle: {
         type: DataTypes.STRING,

@@ -31,7 +31,7 @@ Panele örnek request iletilir.
 
 http://localhost:3000/users/create ile user create edildikten sonra aşağıdaki şekilde db'den oluşturulan user kaydı kontrol edilebilir.
 
--> USE transport_db;
+-> SH
 
 -> SHOW TABLES;
 

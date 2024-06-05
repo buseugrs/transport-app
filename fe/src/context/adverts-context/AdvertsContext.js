@@ -19,7 +19,6 @@ export const AdvertsProvider = ({ children }) => {
     try {
       const response = await fetch("http://localhost:3000/ads/");
       const data = await response.json();
-      console.log(data);
       setAdverts(data);
       setAllAdverts(data);
       setProductAdverts(data.filter((advert) => advert.isProduct === true));
@@ -63,8 +62,6 @@ export const AdvertsProvider = ({ children }) => {
     }
   };
 
-  console.log(favoriteAds);
-
   return (
     <AdvertsContext.Provider
       value={{
@@ -80,7 +77,7 @@ export const AdvertsProvider = ({ children }) => {
         allAdverts
       }}
     >
-      {!loading && children}
+      {children}
     </AdvertsContext.Provider>
   );
 };

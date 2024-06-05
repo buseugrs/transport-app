@@ -33,7 +33,7 @@ const HomePageAdverts = () => {
       </Grid>
     );
   } else {
-    return "Loading";
+    return null;
   }
 };
 
