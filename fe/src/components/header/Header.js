@@ -12,21 +12,26 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import logoIcon from "../../assets/images/logo-icon.png";
-import logoText from "../../assets/images/logo-text.png";
+import logoText from "../../assets/images/image.png";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 1),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    backgroundColor: alpha("#0b6bcb", 1),
+    "& .search-icon": {
+      color: alpha(theme.palette.common.white, 1),
+    },
+    "& .search-input": {
+      color: alpha(theme.palette.common.white, 1),
+    },
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -45,6 +50,10 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+}));
+
+const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
+  color: alpha(theme.palette.common.black, 1),
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -109,7 +118,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
-        sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+        sx={{ backgroundColor: "#3f475f", boxShadow: "none" }}
       >
         <Toolbar>
           <Typography
@@ -123,17 +132,18 @@ const Header = () => {
               cursor: "pointer",
             }}
           >
-            <Box mr={1}>
-              <img src={logoIcon} alt="" style={{ marginRight: "8px" }} />
+            <Box mr={1} display={"flex"} alignItems={"baseline"}>
+              <img src={logoIcon} alt="flexy" />
             </Box>
-            <img src={logoText} alt="" />
+            <img src={logoText} alt="flexy" width={100} />
           </Typography>
 
           <Search>
             <SearchIconWrapper>
-              <SearchIcon style={{ color: "black" }} />
+              <StyledSearchIcon className="search-icon" />
             </SearchIconWrapper>
             <StyledInputBase
+              className="search-input"
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
@@ -174,10 +184,10 @@ const Header = () => {
               </>
             ) : (
               <>
-                <MenuItem component={Link} to="/giris" sx={{ color: "black" }}>
+                <MenuItem component={Link} to="/giris" sx={{ color: "white" }}>
                   Giriş Yap
                 </MenuItem>
-                <MenuItem component={Link} to="/kayit" sx={{ color: "black" }}>
+                <MenuItem component={Link} to="/kayit" sx={{ color: "white" }}>
                   Hesap Aç
                 </MenuItem>
               </>
