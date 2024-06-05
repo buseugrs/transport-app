@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth-context/AuthContext";
 import { useAdverts } from "../../context/adverts-context/AdvertsContext";
 
@@ -13,8 +13,13 @@ import Button from "@mui/joy/Button";
 
 const Adverts = ({ advert }) => {
   const { currentUser } = useAuth();
-  const { handleToggleFavoriteAd } = useAdverts(); // Favori ilanı ekleme/kaldırma işlemini sağlayan fonksiyon
+  const { handleToggleFavoriteAd, favoriteAds } = useAdverts(); // Favori ilanları ve toggle fonksiyonunu kullanıyoruz
   const [isBookmarked, setIsBookmarked] = useState(false);
+
+  useEffect(() => {
+    // İlanın favorilere eklenip eklenmediğini kontrol et
+    setIsBookmarked(favoriteAds.includes(advert.id));
+  }, [favoriteAds, advert.id]);
 
   // İlanın favoriye eklenip çıkarılmasını yöneten fonksiyon
   const handleBookmarkToggle = () => {

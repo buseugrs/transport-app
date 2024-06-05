@@ -7,7 +7,6 @@ export const useAdverts = () => {
 };
 
 export const AdvertsProvider = ({ children }) => {
-
   const [adverts, setAdverts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favoriteAds, setFavoriteAds] = useState([]); // Favori ilanları saklayacak state

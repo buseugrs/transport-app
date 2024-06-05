@@ -28,9 +28,8 @@ const Main = styled("main")(({ theme }) => ({
 const UserProfile = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
-  const { adverts } = useAdverts(); // Destructure adverts from the context
+  const { adverts, favoriteAds } = useAdverts(); // Destructure adverts and favoriteAds from the context
   const { currentUser } = useAuth(); // Destructure currentUser from the context
-  const { favoriteAds } = useAdverts(); // Favori ilanları buradan alınabilir
 
   // Kullanıcı tarafından eklenen ilan sayısı
   const userAdCount = adverts.filter(
@@ -43,7 +42,6 @@ const UserProfile = () => {
   const handleListItemClick = (index) => {
     setActiveIndex(index);
   };
-
 
   const handleAddProductAdvert = () => {
     navigate("/add-product-advert");
@@ -90,6 +88,7 @@ const UserProfile = () => {
                 "&:hover": { backgroundColor: "#f0f8ff", color: "#438ed8" },
               }}
             >
+              <ListItemText primary />
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -150,14 +149,14 @@ const UserProfile = () => {
                 >
                   <StarBorderIcon sx={{ fontSize: 80, color: "#6990ad" }} />
                   <Box ml={1}>
-                  <Typography variant="h6" color={"#6990ad"}>
+                    <Typography variant="h6" color={"#6990ad"}>
                       Favorilere Eklenen
                     </Typography>
                     <Typography variant="h6" color={"#6990ad"}>
                       İlan Adedi
                     </Typography>
                     <Typography variant="h4" color={"#6990ad"}>
-                      {userAdCount}
+                      {userFavoriteAdCount}
                     </Typography>
                   </Box>
                 </Box>
