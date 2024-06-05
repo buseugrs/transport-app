@@ -10,6 +10,7 @@ import UserProfile from "./pages/user-profile/UserProfile";
 import ProductAdvertPage from "./pages/product-advert-page/ProductAdvertPage";
 import VehicleAdvertPage from "./pages/vehicle-advert-page/VehicleAdvertPage";
 import Messages from "./pages/messages-page/Messages";
+import UserAdvertsPage from "./pages/user-adverts-page/UserAdvertsPage"
 
 
 function App() {
@@ -22,10 +23,11 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/giris" element={<Login />} />
               <Route path="/kayit" element={<SignUp />} />
-              <Route path="/profile" element={<UserProfile />} />
-              <Route path="/add-product-advert" element={<ProductAdvertPage />} />
-              <Route path="/add-vehicle-advert" element={<VehicleAdvertPage />} />
-              <Route path="/messages" element={<Messages />} />
+              <Route path="/profil" element={<UserProfile />} />
+              <Route path="/esya-ilani-ekle" element={<ProductAdvertPage />} />
+              <Route path="/arac-ilani-ekle" element={<VehicleAdvertPage />} />
+              <Route path="/mesajlar" element={<Messages />} />
+              <Route path="/ilanlarim" element={<UserAdvertsPage />} />
             </Routes>
         </AdvertsProvider>
       </AuthProvider>

@@ -44,11 +44,11 @@ const UserProfile = () => {
   };
 
   const handleAddProductAdvert = () => {
-    navigate("/add-product-advert");
+    navigate("/esya-ilani-ekle");
   };
 
   const handleAddVehicleAdvert = () => {
-    navigate("/add-vehicle-advert");
+    navigate("/arac-ilani-ekle");
   };
 
   return (

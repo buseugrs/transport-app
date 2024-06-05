@@ -32,8 +32,8 @@ const Adverts = ({ advert }) => {
   };
 
   return (
-    <Card sx={{ width: 320 }}>
-      <div style={{ display: "flex", alignItems: "center" }}>
+    <Card sx={{ width: 320, marginTop: 0}}>
+      <div style={{ display: "flex", alignItems: "center"}}>
         <Typography
           level="title-lg"
           sx={{

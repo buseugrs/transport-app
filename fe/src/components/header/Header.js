@@ -80,7 +80,7 @@ const Header = () => {
 
   const handleProfileClick = () => {
     handleMenuClose();
-    navigate("/profile");
+    navigate("/profil");
   };
 
   const handleLogoClick = () => {
