@@ -88,7 +88,7 @@ const Header = () => {
             <img src={logoText} alt="flexy" width={100} />
           </Typography>
 
-     <RadioButtons/>
+          <RadioButtons />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {currentUser ? (
@@ -111,7 +111,9 @@ const Header = () => {
                   onClick={handleProfileMenuOpen}
                   sx={{ color: "black" }}
                 >
-                  <AccountCircle />
+                  <Typography sx={{ color: "white" }}>
+                    {currentUser.username}
+                  </Typography>
                 </IconButton>
               </>
             ) : (
@@ -132,6 +134,8 @@ const Header = () => {
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               sx={{ color: "black" }}
+              onClick={handleProfileMenuOpen}
+
             >
               <MoreIcon />
             </IconButton>
