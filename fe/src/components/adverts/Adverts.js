@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth-context/AuthContext";
-import { useAdverts } from "../../context/adverts-context/AdvertsContext";
+import AdvertTooltip from "../advert-tooltip/AdvertTooltip";
 
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
-import BookmarkAdd from "@mui/icons-material/BookmarkAddOutlined";
-import BookmarkRemove from "@mui/icons-material/BookmarkRemoveOutlined";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Button from "@mui/joy/Button";
-import StarIcon from '@mui/icons-material/Star';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import StarIcon from "@mui/icons-material/Star";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
 const Adverts = ({ advert }) => {
   const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } =
@@ -51,15 +49,15 @@ const Adverts = ({ advert }) => {
             aria-label={`bookmark ${advert.adTitle}`}
             onClick={handleFavoriteIconClick}
             variant="plain"
-       // Favoriye eklenmişse renk değiştir
+            // Favoriye eklenmişse renk değiştir
             size="sm"
             sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
           >
-   {favoriteAds && favoriteAds.includes(advert.id) ? (
-    <StarIcon sx={{ color: 'orange' }} />
-  ) : (
-    <StarOutlineIcon />
-  )}
+            {favoriteAds && favoriteAds.includes(advert.id) ? (
+              <StarIcon sx={{ color: "orange" }} />
+            ) : (
+              <StarOutlineIcon />
+            )}
           </IconButton>
         )}
       </div>
@@ -98,7 +96,7 @@ const Adverts = ({ advert }) => {
 
         <Button
           variant="solid"
-          size="md"
+          size="lg"
           color="primary"
           aria-label={`Explore ${advert.adTitle}`}
           sx={{
@@ -110,8 +108,9 @@ const Adverts = ({ advert }) => {
             right: "1rem",
           }}
         >
-          İlanı İncele
+          Mesaj
         </Button>
+          <AdvertTooltip  />
       </CardContent>
     </Card>
   );
