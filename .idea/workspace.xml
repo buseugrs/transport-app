@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b710b187-390c-41bb-ae5b-5023cb3f49d9" name="Changes" comment="message logic and new messaging apis">
+    <list default="true" id="b710b187-390c-41bb-ae5b-5023cb3f49d9" name="Changes" comment="favoriteAds bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/be/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/config/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/context/auth-context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/context/auth-context/AuthContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/controllers/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/controllers/userController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/models/Ad.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/models/Ad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/models/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/models/User.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be/routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/routes/userRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/components/add-vehicle-advert-form/AddVehicleAdvertForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/add-vehicle-advert-form/AddVehicleAdvertForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/components/user-adverts/UserAdverts.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/user-adverts/UserAdverts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/components/user-favorite-adverts/UserFavoriteAdverts.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/user-favorite-adverts/UserFavoriteAdverts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +109,7 @@
       <workItem from="1717421250986" duration="1096000" />
       <workItem from="1717447807663" duration="8363000" />
       <workItem from="1717502050992" duration="98000" />
-      <workItem from="1717689740234" duration="6874000" />
+      <workItem from="1717689740234" duration="7701000" />
     </task>
     <task id="LOCAL-00001" summary="first commit for fe">
       <option name="closed" value="true" />
@@ -129,7 +135,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717692687079</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="favoriteAds bug fix">
+      <option name="closed" value="true" />
+      <created>1717703746498</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717703746498</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +152,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit for fe" />
     <MESSAGE value="message logic and new messaging apis" />
-    <option name="LAST_COMMIT_MESSAGE" value="message logic and new messaging apis" />
+    <MESSAGE value="favoriteAds bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="favoriteAds bug fix" />
   </component>
 </project>

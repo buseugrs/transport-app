@@ -8,15 +8,12 @@ import Adverts from "../adverts/Adverts";
 const UserFavoriteAdverts = () => {
   const { favoriteAds } = useAuth();
   const {allAdverts} = useAdverts();
-  console.log("favoriteAds", favoriteAds);
-  console.log("allAdverts", allAdverts);
 
   if(favoriteAds && favoriteAds.length > 0){
     // Kullanıcının favori ilanlarını filtrele
   const userFavoriteAdverts = allAdverts.filter(
     (advert) => favoriteAds.includes(advert.id)
   );
-  console.log("userFavoriteAdverts", userFavoriteAdverts);
 
   return userFavoriteAdverts.map((advert) => (
     <Grid

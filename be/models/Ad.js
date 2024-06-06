@@ -22,6 +22,10 @@ const Ad = sequelize.define('Ad', {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     //Product İlanlarına Özel Alanlar
     productSpecialType: {
         type: DataTypes.STRING,

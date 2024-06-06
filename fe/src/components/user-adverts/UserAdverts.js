@@ -9,6 +9,9 @@ const UserAdverts = () => {
   const { currentUser } = useAuth();
   const { adverts } = useAdverts();
 
+  console.log("advert", adverts);
+  console.log("currentUser", currentUser);
+
   // Kullanıcının sahibi olduğu ilanları filtrele
   const userAdverts = adverts.filter(
     (advert) => advert.userId === currentUser.id

@@ -24,21 +24,6 @@ const checkUserPassword = async (req, res) => {
     }
 };
 
-const getUser = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const user = await User.findByPk(id);
-        console.log(user);
-        if (user) {
-            res.status(200).json(user);
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
 const updateFavoriteAds = async (req, res) => {
     const { username } = req.params;
     const { favoriteAds } = req.body; // Array of favorite ad IDs
@@ -75,4 +60,4 @@ const getFavoriteAds = async (req, res) => {
 };
 
 
-module.exports = { createUser, checkUserPassword, getUser, updateFavoriteAds, getFavoriteAds };
+module.exports = { createUser, checkUserPassword, updateFavoriteAds, getFavoriteAds };

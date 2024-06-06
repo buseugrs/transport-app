@@ -150,7 +150,6 @@ const AddVehicleAdvertForm = () => {
   };
 
   const handleAddListing = async () => {
-    console.log("handleAddListing");
     if (
       newListing.image === "" ||
       newListing.name === "" ||
