@@ -65,45 +65,35 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const checkMessages = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/messages/check/${currentUser.username}`
-        );
-        console.log("checkMessages", response.data);
-        setUnreadMessages(response.data.unreadMessages);
-        const incomingMessagesFrom = response.data.incomingMessagesFrom.map(
-          (message) => message.sender
-        );
-        const outgoingMessagesFrom = response.data.outgoingMessagesFrom.map(
-          (message) => message.receiver
-        );
-        console.log(incomingMessagesFrom);
-        console.log(outgoingMessagesFrom);
+  const checkMessages = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/messages/check/${currentUser.username}`
+      );
+      console.log("checkMessages", response.data);
+      setUnreadMessages(response.data.unreadMessages);
+      const incomingMessagesFrom = response.data.incomingMessagesFrom.map(
+        (message) => message.sender
+      );
+      const outgoingMessagesFrom = response.data.outgoingMessagesFrom.map(
+        (message) => message.receiver
+      );
 
-        // İki listeyi birleştirip benzersiz kullanıcıları elde etme
-        const combinedMessages = [
-          ...incomingMessagesFrom,
-          ...outgoingMessagesFrom,
-        ];
-        console.log(combinedMessages);
-        const uniqueUsers = Array.from(
-          new Set(combinedMessages.map((message) => message))
-        );
-        console.log(uniqueUsers);
+      // İki listeyi birleştirip benzersiz kullanıcıları elde etme
+      const combinedMessages = [
+        ...incomingMessagesFrom,
+        ...outgoingMessagesFrom,
+      ];
+      const uniqueUsers = Array.from(
+        new Set(combinedMessages.map((message) => message))
+      );
 
-        // conversationHistory'i setleyelim
-        setConversationHistory(uniqueUsers);
-        console.log(conversationHistory);
-      } catch (error) {
-        console.error("Mesajlar kontrol edilirken hata oluştu:", error);
-      }
-    };
-    if (currentUser) {
-      checkMessages();
+      // conversationHistory'i setleyelim
+      setConversationHistory(uniqueUsers);
+    } catch (error) {
+      console.error("Mesajlar kontrol edilirken hata oluştu:", error);
     }
-  }, []);
+  };
 
   const getConversation = async (conversationUserWith) => {
     try {
@@ -124,20 +114,39 @@ export const AuthProvider = ({ children }) => {
         receiver: receiver,
         message: message,
       });
-      setCurrentConversation(response.data);
+      getConversation(receiver);
     } catch (error) {
       console.error("Mesajlar kontrol edilirken hata oluştu:", error);
     }
   };
 
+  const updateMessagesReadTrue = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/messages/updateMessagesReadTrue/${currentUser.username}`
+      );
+      checkMessages();
+    } catch (error) {
+      console.error("Mesajlar kontrol edilirken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (currentUser) {
+        await checkMessages();
+      }
+    };
+  
+    fetchData();
+  }, [currentUser, unreadMessages]); 
+  
   const updateFavoriteAds = async (username, newFavoriteAds) => {
-    console.log("update", username);
     try {
       const response = await axios.post(
         `http://localhost:3000/users/updateFavorites/${username}`,
         { favoriteAds: newFavoriteAds }
       );
-      console.log(response.data); // İşlem başarılıysa API yanıtını konsola yazdır
       getFavoriteAds(currentUser.username);
     } catch (error) {
       console.error("Favori ilanlar güncellenirken bir hata oluştu:", error);
@@ -149,7 +158,6 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(
         `http://localhost:3000/users/getFavoriteAds/${username}`
       );
-      console.log(response.data);
       const favoriteAds = response.data.favoriteAds;
       setFavoriteAds(favoriteAds);
     } catch (error) {
@@ -179,6 +187,7 @@ export const AuthProvider = ({ children }) => {
         currentConversation,
         sendMessage,
         currentConversationReceiver,
+        updateMessagesReadTrue,
       }}
     >
       {children}

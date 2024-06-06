@@ -84,7 +84,7 @@ const ConversationWindow = () => {
           placeholder="Mesajınızı yazın..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          onKeyPress={(e) => {
+          onKeyDown={(e) => {
             if (e.key === "Enter") {
               handleSendMessage();
             }

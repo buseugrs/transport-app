@@ -20,7 +20,7 @@ import logoText from "../../assets/images/image.png";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { currentUser, logout, unreadMessages } = useAuth();
+  const { currentUser, logout, unreadMessages, updateMessagesReadTrue } = useAuth();
   const navigate = useNavigate();
   console.log(unreadMessages);
 
@@ -95,7 +95,7 @@ const Header = () => {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {currentUser ? (
               <>
-                <Link to="/mesajlarim">
+                <Link to="/mesajlarim" onClick={updateMessagesReadTrue}>
                   {unreadMessages ? (
                     <IconButton
                       size="large"
