@@ -10,7 +10,7 @@ mySQL klasöründeki setup kurulur
 1) MySQL Command Line çalıştırılır
 2) Aşağıdaki komut ile DB oluşturulur:
    CREATE DATABASE transport_db;
-3) db.js dosyasında ilgili tanımlamalar yapılır (Eğer yapıldıysa direkt backend başlatılır)
+3) db.js dosyasında ilgili tanımlamalar yapılır (Eğer yapıldıysa direkt)
 
 Örnek çalıştırma:
 
