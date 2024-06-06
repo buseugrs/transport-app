@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
       });
       const userData = { email: response.data.email, password: response.data.password, username: response.data.username};
       setCurrentUser(userData);
-      getFavoriteAds();
+      await getFavoriteAds(userData.username);
       // Kullanıcı oturum bilgilerini localStorage'e kaydet
       localStorage.setItem("currentUser", JSON.stringify(userData));
     } catch (error) {
