@@ -219,8 +219,8 @@ const AddProductAddvertForm = () => {
       <Card variant="outlined" sx={{ p: 0 }}>
         <Box sx={{ padding: "15px 30px" }} display="flex" alignItems="center">
           <Box flexGrow={1}>
-            <Typography sx={{ fontSize: "18px", fontWeight: "500" }}>
-              Ürün Ekle
+            <Typography sx={{ fontSize: "18px", fontWeight: "900", color:"#1976d2" }}>
+              Eşya İlanı Ekle
             </Typography>
           </Box>
         </Box>

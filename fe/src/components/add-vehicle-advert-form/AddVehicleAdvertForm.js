@@ -17,8 +17,6 @@ import {
   Divider,
 } from "@mui/material";
 
-const initialProducts = [];
-
 const AddVehicleAdvertForm = () => {
   const { fetchData } = useAdverts();
   const [newListing, setNewListing] = useState({
@@ -215,8 +213,8 @@ const AddVehicleAdvertForm = () => {
       <Card variant="outlined" sx={{ p: 0, mb: 4 }}>
         <Box sx={{ padding: "15px 30px" }} display="flex" alignItems="center">
           <Box flexGrow={1}>
-            <Typography sx={{ fontSize: "18px", fontWeight: "500" }}>
-              İlan Ekle
+            <Typography sx={{ fontSize: "18px", fontWeight: "900", color:"#1976d2" }}>
+              Araç İlanı Ekle
             </Typography>
           </Box>
         </Box>
