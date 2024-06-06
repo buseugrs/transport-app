@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
-import AdvertTooltip from "../advert-tooltip/AdvertTooltip";
+import AdvertDetail from "../advert-detail/AdvertDetail";
 
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -110,7 +111,25 @@ const Adverts = ({ advert }) => {
         >
           Mesaj
         </Button>
-          <AdvertTooltip  />
+        
+        <Link to={`/ilan/${advert.id}`}>
+        <Button
+          variant="solid"
+          size="lg"
+          color="primary"
+          aria-label={`Explore ${advert.adTitle}`}
+          sx={{
+            ml: "auto",
+            alignSelf: "center",
+            fontWeight: 600,
+            position: "absolute",
+            bottom: "1rem",
+            left: "1rem",
+          }}
+        >
+         İlan Detayı
+        </Button>
+        </Link>
       </CardContent>
     </Card>
   );

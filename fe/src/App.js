@@ -12,6 +12,7 @@ import VehicleAdvertPage from "./pages/vehicle-advert-page/VehicleAdvertPage";
 import Messages from "./pages/messages-page/Messages";
 import UserAdvertsPage from "./pages/user-adverts-page/UserAdvertsPage"
 import UserFavoriteAdvertsPage from "./pages/user-favorite-adverts-page/UserFavoriteAdvertsPage";
+import AdvertDetailPage from "./pages/advert-detail-page/AdvertDetailPage";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/mesajlar" element={<Messages />} />
               <Route path="/ilanlarim" element={<UserAdvertsPage />} />
               <Route path="/favori-ilanlarim" element={<UserFavoriteAdvertsPage />} />
+              <Route path="/ilan/:advertId" element={<AdvertDetailPage />} />
             </Routes>
         </AdvertsProvider>
       </AuthProvider>
