@@ -34,7 +34,7 @@ const UserProfile = () => {
 
   // Kullanıcı tarafından eklenen ilan sayısı
   const userAdCount = adverts.filter(
-    (ad) => ad.userId === currentUser.id
+    (ad) => ad.username === currentUser.username
   ).length;
 
   const handleListItemClick = (index) => {

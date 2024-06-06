@@ -10,9 +10,9 @@ const getAds = async (req, res) => {
 };
 
 const addAd = async (req, res) => {
-    const { adPhoto, adTitle, adDescription, budget, isProduct, productSpecialType, productSpecialDate, productSpecialStartCity, productSpecialEndCity, productSpecialIsElevatorNeeded, productSpecialStartFloor, productSpecialEndFloor, vehicleSpecialLicensePlate, vehicleSpecialType, vehicleSpecialServiceCities } = req.body;
+    const { username, adPhoto, adTitle, adDescription, budget, isProduct, productSpecialType, productSpecialDate, productSpecialStartCity, productSpecialEndCity, productSpecialIsElevatorNeeded, productSpecialStartFloor, productSpecialEndFloor, vehicleSpecialLicensePlate, vehicleSpecialType, vehicleSpecialServiceCities } = req.body;
     try {
-        const ad = await Ad.create({ adPhoto, adTitle, adDescription, budget, isProduct, productSpecialType, productSpecialDate, productSpecialStartCity, productSpecialEndCity, productSpecialIsElevatorNeeded, productSpecialStartFloor, productSpecialEndFloor, vehicleSpecialLicensePlate, vehicleSpecialType, vehicleSpecialServiceCities });
+        const ad = await Ad.create({ username, adPhoto, adTitle, adDescription, budget, isProduct, productSpecialType, productSpecialDate, productSpecialStartCity, productSpecialEndCity, productSpecialIsElevatorNeeded, productSpecialStartFloor, productSpecialEndFloor, vehicleSpecialLicensePlate, vehicleSpecialType, vehicleSpecialServiceCities });
         res.status(201).json(ad);
     } catch (error) {
         res.status(500).json({ message: error.message });

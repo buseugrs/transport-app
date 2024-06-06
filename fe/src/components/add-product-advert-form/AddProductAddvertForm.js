@@ -19,11 +19,11 @@ import {
   Grid,
   Snackbar,
 } from "@mui/material";
-
-const initialProducts = [];
+import {useAuth} from "../../context/auth-context/AuthContext";
 
 const AddProductAddvertForm = () => {
   const { fetchData } = useAdverts();
+  const {currentUser} = useAuth();
   const [newProduct, setNewProduct] = useState({
     id: "",
     name: "",
@@ -164,6 +164,7 @@ const AddProductAddvertForm = () => {
     }
 
     const adData = {
+      username: currentUser.username,
       adPhoto: newProduct.image, // İlan fotoğrafı
       adTitle: newProduct.name, // İlan başlığı
       adDescription: newProduct.description, // İlan açıklaması
@@ -174,7 +175,7 @@ const AddProductAddvertForm = () => {
       productSpecialStartCity: newProduct.fromCity, // Başlangıç şehri
       productSpecialEndCity: newProduct.toCity, // Varış şehri
       productSpecialIsElevatorNeeded:
-        newProduct.elevatorRequired === "yes" ? true : false, // Asansör gereksinimi
+        newProduct.elevatorRequired === "yes", // Asansör gereksinimi
       productSpecialStartFloor: parseInt(newProduct.fromFloor), // Başlangıç katı
       productSpecialEndFloor: parseInt(newProduct.toFloor), // Varış katı
     };
