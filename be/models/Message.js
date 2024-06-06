@@ -3,11 +3,11 @@ const sequelize = require('../config/db');
 
 const Message = sequelize.define('Message', {
     sender: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     receiver: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     message: {
