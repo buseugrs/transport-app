@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem("currentUser");
     return storedUser ? JSON.parse(storedUser) : null;
   });
+  const [unreadMessages, setUnreadMessages] = useState(false);
 
   const login = async (email, password) => {
     try {
@@ -54,6 +55,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const checkMessages = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/messages/check/${currentUser.id}`
+        );
+        setUnreadMessages(response.data.unreadMessages);
+      } catch (error) {
+        console.error("Mesajlar kontrol edilirken hata oluştu:", error);
+      }
+    };
+
+    if (currentUser) {
+      checkMessages();
+      console.log(unreadMessages);
+    }
+  }, [currentUser]);
+
   const updateFavoriteAds = async (username, newFavoriteAds) => {
     console.log("update", username);
     try {
@@ -93,7 +112,8 @@ useEffect(() => {
         signup,
         favoriteAds,
         updateFavoriteAds,
-        getFavoriteAds
+        getFavoriteAds,
+        unreadMessages,
       }}
     >
       {children}

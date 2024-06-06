@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
-import AdvertDetail from "../advert-detail/AdvertDetail";
+import axios from "axios";
 
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -15,6 +15,21 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 const Adverts = ({ advert }) => {
   const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } =
     useAuth();
+    const [message, setMessage] = useState("");
+
+    const handleMessageSend = async (senderInput,  receiverInput, messageInput) => {
+      try {
+        await axios.post(`http://localhost:3000/messages/send`, {
+         sender: senderInput,
+         receiver: receiverInput,
+         message: messageInput
+        });
+        alert("Mesaj başarıyla gönderildi!");
+      } catch (error) {
+        console.error("Mesaj gönderilirken hata oluştu:", error);
+        alert("Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.");
+      }
+    };
 
   const handleFavoriteIconClick = () => {
     if (favoriteAds && favoriteAds.includes(advert.id)) {
@@ -95,11 +110,10 @@ const Adverts = ({ advert }) => {
           </div>
         )}
 
-        <Button
+        <Button onClick={handleMessageSend}
           variant="solid"
           size="lg"
           color="primary"
-          aria-label={`Explore ${advert.adTitle}`}
           sx={{
             ml: "auto",
             alignSelf: "center",
@@ -117,7 +131,7 @@ const Adverts = ({ advert }) => {
           variant="solid"
           size="lg"
           color="primary"
-          aria-label={`Explore ${advert.adTitle}`}
+
           sx={{
             ml: "auto",
             alignSelf: "center",

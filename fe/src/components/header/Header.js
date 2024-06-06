@@ -1,6 +1,8 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
+import axios from "axios";
 import RadioButtons from "../radio-buttons/RadioButtons";
 
 import AppBar from "@mui/material/AppBar";
@@ -8,20 +10,17 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import logoIcon from "../../assets/images/logo-icon.png";
 import logoText from "../../assets/images/image.png";
 
 const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const { currentUser, logout } = useAuth();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { currentUser, logout, unreadMessages } = useAuth();
   const navigate = useNavigate();
 
   const handleProfileMenuOpen = (event) => {
@@ -66,87 +65,98 @@ const Header = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-    <AppBar
-      position="static"
-      sx={{ backgroundColor: "#3f475f", boxShadow: "none" }}
-    >
-      <Toolbar sx={{ justifyContent: 'space-between' }}> {/* Toolbar'un içeriğini ortalamak için */}
-        <Typography
-          onClick={handleLogoClick}
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{
-            display: { xs: "flex", sm: "flex" },
-            alignItems: "center",
-            cursor: "pointer",
-          }}
-        >
-          <Box mr={1}>
-            <img src={logoIcon} alt="flexy" />
-          </Box>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <img src={logoText} alt="flexy" width={100} />
-          </Box>
-        </Typography>
-  
-        <RadioButtons /> 
-  
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          {currentUser ? (
-            <>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                sx={{ color: "black" }}
-              >
-                <Badge badgeContent={4} color="error">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                sx={{ color: "black" }}
-              >
-                <Typography sx={{ color: "white" }}>
-                  {currentUser.username}
-                </Typography>
-              </IconButton>
-            </>
-          ) : (
-            <>
-              <MenuItem component={Link} to="/giris" sx={{ color: "white" }}>
-                Giriş Yap
-              </MenuItem>
-              <MenuItem component={Link} to="/kayit" sx={{ color: "white" }}>
-                Hesap Aç
-              </MenuItem>
-            </>
-          )}
-        </Box>
-        <Box sx={{ display: { xs: "flex", md: "none" } }}>
-          <IconButton
-            size="large"
-            aria-label="show more"
-            aria-controls={mobileMenuId}
-            aria-haspopup="true"
-            sx={{ color: "black" }}
-            onClick={handleProfileMenuOpen}
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "#3f475f", boxShadow: "none" }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          {" "}
+          {/* Toolbar'un içeriğini ortalamak için */}
+          <Typography
+            onClick={handleLogoClick}
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "flex", sm: "flex" },
+              alignItems: "center",
+              cursor: "pointer",
+            }}
           >
-            <MoreIcon />
-          </IconButton>
-        </Box>
-      </Toolbar>
-    </AppBar>
-    {renderMenu}
-  </Box>
-  
-  
+            <Box mr={1}>
+              <img src={logoIcon} alt="flexy" />
+            </Box>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <img src={logoText} alt="flexy" width={100} />
+            </Box>
+          </Typography>
+          <RadioButtons />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            {currentUser ? (
+              <>
+                <Link to="/mesajlarim">
+                  {unreadMessages ? (
+                    <IconButton
+                      size="large"
+                      aria-label="show 4 new mails"
+                      sx={{ color: "black" }}
+                    >
+                      <Badge color="error">
+                        <MailIcon />
+                      </Badge>
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      size="large"
+                      aria-label="show 4 new mails"
+                      sx={{ color: "black" }}
+                    >
+                      <MailIcon />
+                    </IconButton>
+                  )}
+
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    aria-label="account of current user"
+                    aria-controls={menuId}
+                    aria-haspopup="true"
+                    onClick={handleProfileMenuOpen}
+                    sx={{ color: "black" }}
+                  >
+                    <Typography sx={{ color: "white" }}>
+                      {currentUser.username}
+                    </Typography>
+                  </IconButton>
+                </Link>
+              </>
+            ) : (
+              <>
+                <MenuItem component={Link} to="/giris" sx={{ color: "white" }}>
+                  Giriş Yap
+                </MenuItem>
+                <MenuItem component={Link} to="/kayit" sx={{ color: "white" }}>
+                  Hesap Aç
+                </MenuItem>
+              </>
+            )}
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              sx={{ color: "black" }}
+              onClick={handleProfileMenuOpen}
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMenu}
+    </Box>
   );
 };
 
