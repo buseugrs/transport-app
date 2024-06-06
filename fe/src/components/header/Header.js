@@ -22,6 +22,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { currentUser, logout, unreadMessages } = useAuth();
   const navigate = useNavigate();
+  console.log(unreadMessages);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -101,7 +102,7 @@ const Header = () => {
                       aria-label="show 4 new mails"
                       sx={{ color: "black" }}
                     >
-                      <Badge color="error">
+                      <Badge sx={{color:"#f44336"}} color="error">
                         <MailIcon />
                       </Badge>
                     </IconButton>
@@ -114,21 +115,21 @@ const Header = () => {
                       <MailIcon />
                     </IconButton>
                   )}
-
-                  <IconButton
-                    size="large"
-                    edge="end"
-                    aria-label="account of current user"
-                    aria-controls={menuId}
-                    aria-haspopup="true"
-                    onClick={handleProfileMenuOpen}
-                    sx={{ color: "black" }}
-                  >
-                    <Typography sx={{ color: "white" }}>
-                      {currentUser.username}
-                    </Typography>
-                  </IconButton>
                 </Link>
+
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  sx={{ color: "black" }}
+                >
+                  <Typography sx={{ color: "white" }}>
+                    {currentUser.username}
+                  </Typography>
+                </IconButton>
               </>
             ) : (
               <>

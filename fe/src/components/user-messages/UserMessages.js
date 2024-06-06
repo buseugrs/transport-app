@@ -1,78 +1,48 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import { useAuth } from "../../context/auth-context/AuthContext";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { Avatar } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
+import ConversationWindow from "../conversation-window/ConversationWindow";
 
 const UserMessages = () => {
+  const { conversationHistory, getConversation } = useAuth();
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Summer BBQ"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Oui Oui"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Sandra Adams
-              </Typography>
-              {' — Do you have Paris recommendations? Have you ever…'}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
+    <>
+        <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      {conversationHistory.map((conversationUser, index) => {
+        return (
+          <ListItem alignItems="center" key={index} sx={{cursor:"pointer"}}  onClick={() => getConversation(conversationUser)} >
+            <ListItemAvatar>
+              <Avatar>
+                <LocalPostOfficeIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText 
+              primary={conversationUser}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>
+        );
+      })}
     </List>
+    <ConversationWindow/>
+    </>
+
   );
-}
+};
 
 export default UserMessages;
