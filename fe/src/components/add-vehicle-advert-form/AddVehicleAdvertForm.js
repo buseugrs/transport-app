@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAdverts } from "../../context/adverts-context/AdvertsContext";
+import { useAuth } from "../../context/auth-context/AuthContext";
 
 import {
   Typography,
@@ -19,6 +20,7 @@ import {
 
 const AddVehicleAdvertForm = () => {
   const { fetchData } = useAdverts();
+  const { currentUser } = useAuth();
   const [newListing, setNewListing] = useState({
     id: "",
     name: "",
@@ -165,6 +167,7 @@ const AddVehicleAdvertForm = () => {
     }
 
     const adData = {
+      username: currentUser.username,
       adPhoto: newListing.image, // İlan fotoğrafı
       adTitle: newListing.name, // İlan başlığı
       adDescription: newListing.description, // İlan açıklaması
@@ -212,7 +215,9 @@ const AddVehicleAdvertForm = () => {
       <Card variant="outlined" sx={{ p: 0, mb: 4 }}>
         <Box sx={{ padding: "15px 30px" }} display="flex" alignItems="center">
           <Box flexGrow={1}>
-            <Typography sx={{ fontSize: "18px", fontWeight: "900", color:"#1976d2" }}>
+            <Typography
+              sx={{ fontSize: "18px", fontWeight: "900", color: "#1976d2" }}
+            >
               Araç İlanı Ekle
             </Typography>
           </Box>
@@ -241,6 +246,7 @@ const AddVehicleAdvertForm = () => {
                 <br />
               </Box>
             )}
+            <br/>
             <TextField
               label="Firma Adı"
               name="name"

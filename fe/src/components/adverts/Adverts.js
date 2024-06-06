@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
 import axios from "axios";
@@ -15,21 +15,25 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 const Adverts = ({ advert }) => {
   const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } =
     useAuth();
-    const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
 
-    const handleMessageSend = async (senderInput,  receiverInput, messageInput) => {
-      try {
-        await axios.post(`http://localhost:3000/messages/send`, {
-         sender: senderInput,
-         receiver: receiverInput,
-         message: messageInput
-        });
-        alert("Mesaj başarıyla gönderildi!");
-      } catch (error) {
-        console.error("Mesaj gönderilirken hata oluştu:", error);
-        alert("Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.");
-      }
-    };
+  const handleMessageSend = async (
+    senderInput,
+    receiverInput,
+    messageInput
+  ) => {
+    try {
+      await axios.post(`http://localhost:3000/messages/send`, {
+        sender: senderInput,
+        receiver: receiverInput,
+        message: messageInput,
+      });
+      alert("Mesaj başarıyla gönderildi!");
+    } catch (error) {
+      console.error("Mesaj gönderilirken hata oluştu:", error);
+      alert("Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.");
+    }
+  };
 
   const handleFavoriteIconClick = () => {
     if (favoriteAds && favoriteAds.includes(advert.id)) {
@@ -104,13 +108,23 @@ const Adverts = ({ advert }) => {
             <Typography level="body-md" fontWeight={900}>
               {advert.budget} TL
             </Typography>
-            <Typography level="body-md">
+            <Typography
+              level="body-md"
+              sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 1,
+              }}
+            >
               Hizmet Verilen Şehirler: {advert.vehicleSpecialServiceCities}
             </Typography>
           </div>
         )}
 
-        <Button onClick={handleMessageSend}
+        <Button
+          onClick={handleMessageSend}
           variant="solid"
           size="lg"
           color="primary"
@@ -125,24 +139,23 @@ const Adverts = ({ advert }) => {
         >
           Mesaj
         </Button>
-        
-        <Link to={`/ilan/${advert.id}`}>
-        <Button
-          variant="solid"
-          size="lg"
-          color="primary"
 
-          sx={{
-            ml: "auto",
-            alignSelf: "center",
-            fontWeight: 600,
-            position: "absolute",
-            bottom: "1rem",
-            left: "1rem",
-          }}
-        >
-         İlan Detayı
-        </Button>
+        <Link to={`/ilan/${advert.id}`}>
+          <Button
+            variant="solid"
+            size="lg"
+            color="primary"
+            sx={{
+              ml: "auto",
+              alignSelf: "center",
+              fontWeight: 600,
+              position: "absolute",
+              bottom: "1rem",
+              left: "1rem",
+            }}
+          >
+            İlan Detayı
+          </Button>
         </Link>
       </CardContent>
     </Card>
