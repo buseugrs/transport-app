@@ -54,11 +54,6 @@ export const AuthProvider = ({ children }) => {
         password,
         username,
       });
-      setCurrentUser({
-        email: response.data.email,
-        password: response.data.password,
-        username: response.data.username,
-      });
     } catch (error) {
       console.error("Signup failed:", error);
       throw error;
