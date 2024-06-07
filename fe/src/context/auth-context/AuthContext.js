@@ -7,21 +7,36 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+  // favori ilanların eklendiği state
   const [favoriteAds, setFavoriteAds] = useState([]);
+
+  // login olan user'ın tutulduğu state
+
   const [currentUser, setCurrentUser] = useState(() => {
     // Sayfa yenilendiğinde localStorage'den oturum durumunu al
     const storedUser = localStorage.getItem("currentUser");
     return storedUser ? JSON.parse(storedUser) : null;
   });
+
+  // okunmayan mesajların tutulduğu state
   const [unreadMessages, setUnreadMessages] = useState(false);
+
+  // mesaj gönderen ve mesajı alanın tutulduğu state
   const [conversationHistory, setConversationHistory] = useState([]);
+
+  // konuşma geçmişini tutan state
   const [currentConversation, setCurrentConversation] = useState([]);
+
+  // var olan kullanıcı adı veya eposta varsa error vermek için tutulan state
   const [signUpError, setSignUpError] = useState("");
+
+    // yanlış eposta veya şifre varsa error vermek için tutulan state
   const [loginError, setLoginError] = useState("");
   const [currentConversationReceiver, setCurrentConversationReceiver] =
     useState("");
   const navigate = useNavigate();
 
+// login durumunda alınan datalar
   const login = async (email, password) => {
     try {
       const response = await axios.post("http://localhost:3000/users/login", {
@@ -45,6 +60,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // logout durumunda alınan datalar
   const logout = () => {
     navigate("/"); // Navigate to home before setting user to null
     setCurrentUser(null);
@@ -52,6 +68,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("currentUser");
   };
 
+  // signup durumunda alınan datalar
   const signup = async (username, email, password) => {
     try {
       const response = await axios.post("http://localhost:3000/users/create", {
@@ -67,6 +84,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Gelen mesajları kontrol eden fonksiyon
   const checkMessages = async () => {
     try {
       const response = await axios.get(
@@ -97,6 +115,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Mesajlaşmaları alan fonksiyon
   const getConversation = async (conversationUserWith) => {
     try {
       const response = await axios.get(
@@ -109,6 +128,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Mesaj gönderen fonksiyon
   const sendMessage = async (receiver, message) => {
     try {
       const response = await axios.post("http://localhost:3000/messages/send", {
@@ -122,6 +142,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Mesaj güncelleme
   const updateMessagesReadTrue = async () => {
     try {
       const response = await axios.post(
@@ -143,6 +164,7 @@ export const AuthProvider = ({ children }) => {
     fetchData();
   }, [currentUser, unreadMessages]);
 
+  // Favori ilanları güncelleme
   const updateFavoriteAds = async (username, newFavoriteAds) => {
     try {
       const response = await axios.post(
@@ -155,6 +177,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  //Favori ilanları alma
   const getFavoriteAds = async (username) => {
     try {
       const response = await axios.get(
@@ -192,7 +215,7 @@ export const AuthProvider = ({ children }) => {
         updateMessagesReadTrue,
         setCurrentConversationReceiver,
         signUpError,
-        loginError
+        loginError,
       }}
     >
       {children}
