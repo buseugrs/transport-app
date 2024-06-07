@@ -19,7 +19,8 @@ import logoText from "../../assets/images/image.png";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { currentUser, logout, unreadMessages, updateMessagesReadTrue } = useAuth();
+  const { currentUser, logout, unreadMessages, updateMessagesReadTrue } =
+    useAuth();
   const navigate = useNavigate();
   console.log(unreadMessages);
 
@@ -70,8 +71,6 @@ const Header = () => {
         sx={{ backgroundColor: "#3f475f", boxShadow: "none" }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          {" "}
-          {/* Toolbar'un içeriğini ortalamak için */}
           <Typography
             onClick={handleLogoClick}
             variant="h6"
@@ -101,7 +100,7 @@ const Header = () => {
                       aria-label="show 4 new mails"
                       sx={{ color: "black" }}
                     >
-                      <Badge sx={{color:"#f44336"}} color="error">
+                      <Badge sx={{ color: "#f44336" }} color="error">
                         <MailIcon />
                       </Badge>
                     </IconButton>

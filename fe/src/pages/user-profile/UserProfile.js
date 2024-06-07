@@ -108,9 +108,9 @@ const UserProfile = () => {
 
       <Container maxWidth="md">
         <Main sx={{ paddingTop: 0 }}>
-          <Grid container spacing={3} mb={3}>
-            <Grid item xs={12} md={6}>
-              <Paper
+          <Grid container spacing={3} mb={10} >
+            <Grid item xs={12} md={6} >
+              <Paper 
                 elevation={3}
                 sx={{
                   height: "100%",
