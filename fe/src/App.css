@@ -4,17 +4,23 @@
   font-family: "Roboto", sans-serif;
 }
 
+
 .footer {
   background-color: #3f475f;
   color: #5b1e1e;
   padding: 30px 0;
   text-align: center; /* Tüm içeriği ortala */
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .box-container {
   display: flex;
   justify-content: center; /* Kutuları yatay olarak ortala */
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .box {
