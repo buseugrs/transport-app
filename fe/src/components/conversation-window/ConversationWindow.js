@@ -10,6 +10,8 @@ const ConversationWindow = () => {
     currentConversationReceiver,
   } = useAuth();
 
+  console.log(currentConversationReceiver);
+
   const [newMessage, setNewMessage] = useState("");
 
   const handleSendMessage = () => {
@@ -27,6 +29,7 @@ const ConversationWindow = () => {
         height: "80vh",
         bgcolor: "#f5f5f5",
         borderRadius: 2,
+        padding: "16px",
       }}
     >
       <Box sx={{ flex: 1, overflowY: "scroll", padding: 2 }}>
@@ -35,32 +38,32 @@ const ConversationWindow = () => {
           currentConversation.map((message, index) => {
             const isCurrentUser = message.sender === currentUser.username;
             return (
-              <Box
-                key={index}
-                sx={{
-                  display: "flex",
-                  justifyContent: isCurrentUser ? "flex-end" : "flex-start",
-                  mb: 1,
-                }}
-              >
-                <Paper
-                  elevation={1}
+                <Box
+                  key={index}
                   sx={{
-                    p: 2,
-                    bgcolor: isCurrentUser ? "#DCF8C6" : "#FFFFFF",
-                    maxWidth: "60%",
-                    borderRadius: 2,
+                    display: "flex",
+                    justifyContent: isCurrentUser ? "flex-end" : "flex-start",
+                    mb: 1,
                   }}
                 >
-                  <Typography variant="body1">{message.message}</Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{ display: "block", textAlign: "right", mt: 1 }}
+                  <Paper
+                    elevation={1}
+                    sx={{
+                      p: 2,
+                      bgcolor: isCurrentUser ? "#DCF8C6" : "#FFFFFF",
+                      maxWidth: "60%",
+                      borderRadius: 2,
+                    }}
                   >
-                    {new Date(message.createdAt).toLocaleTimeString()}
-                  </Typography>
-                </Paper>
-              </Box>
+                    <Typography variant="body1">{message.message}</Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "block", textAlign: "right", mt: 1 }}
+                    >
+                      {new Date(message.createdAt).toLocaleTimeString()}
+                    </Typography>
+                  </Paper>
+                </Box>
             );
           })
         ) : (

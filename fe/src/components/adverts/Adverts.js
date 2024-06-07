@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
 import axios from "axios";
@@ -13,26 +13,19 @@ import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
 const Adverts = ({ advert }) => {
-  const { currentUser, favoriteAds, getFavoriteAds, updateFavoriteAds } =
-    useAuth();
-  const [message, setMessage] = useState("");
+  const {
+    currentUser,
+    favoriteAds,
+    getFavoriteAds,
+    updateFavoriteAds,
+    setCurrentConversationReceiver,
+  } = useAuth();
 
-  const handleMessageSend = async (
-    senderInput,
-    receiverInput,
-    messageInput
-  ) => {
-    try {
-      await axios.post(`http://localhost:3000/messages/send`, {
-        sender: senderInput,
-        receiver: receiverInput,
-        message: messageInput,
-      });
-      alert("Mesaj başarıyla gönderildi!");
-    } catch (error) {
-      console.error("Mesaj gönderilirken hata oluştu:", error);
-      alert("Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.");
-    }
+  console.log(advert);
+
+  const handleMessageSend = async () => {
+    setCurrentConversationReceiver(advert.username);
+    console.log(advert.username);
   };
 
   const handleFavoriteIconClick = () => {
@@ -59,7 +52,7 @@ const Adverts = ({ advert }) => {
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 1,
-            marginRight: "8px", // Sağ tarafta bir boşluk bırakmak için
+            marginRight: "8px",
           }}
         >
           {advert.adTitle}
@@ -123,22 +116,24 @@ const Adverts = ({ advert }) => {
           </div>
         )}
 
-        <Button
+        <Link to={`/mesajlarim`}>
+          <Button
           onClick={handleMessageSend}
-          variant="solid"
-          size="lg"
-          color="primary"
-          sx={{
-            ml: "auto",
-            alignSelf: "center",
-            fontWeight: 600,
-            position: "absolute",
-            bottom: "1rem",
-            right: "1rem",
-          }}
-        >
-          Mesaj
-        </Button>
+            variant="solid"
+            size="lg"
+            color="primary"
+            sx={{
+              ml: "auto",
+              alignSelf: "center",
+              fontWeight: 600,
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+            }}
+          >
+            Mesaj
+          </Button>
+        </Link>
 
         <Link to={`/ilan/${advert.id}`}>
           <Button

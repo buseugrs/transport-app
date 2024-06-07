@@ -11,6 +11,12 @@ mySQL klasöründeki setup kurulur
 2) Aşağıdaki komut ile DB oluşturulur:
    CREATE DATABASE transport_db;
 3) db.js dosyasında ilgili tanımlamalar yapılır (Eğer yapıldıysa direkt)
+4) USE transport_db; komutu ile ilgili database'e geçilir. 
+5) SHOW TABLES; komutu ile seçilen database'deki tüm tablolara bakılabilir. 
+6) SELECT * FROM tablo_ismi; komutu ile herhangi bir tabloya select atılabilir. (tablo_ismi yerine  istenilen tablo ismi yazılmalıdır.)
+7) DROP TABLE tablo_ismi; komutu ile herhangi bir tablo silinebilir. (tablo sildikten sonra tablonun otomatik bir şekilde tekrar oluşturulabilmesi için  backend projesi kapatılıp tekrardan ayağa kaldırılmalıdır.)
+
+** Frontend akışı dışında manuel yapılabilecek kontroller için ;
 
 Örnek çalıştırma:
 
@@ -29,10 +35,3 @@ Panele örnek request iletilir.
     "password" : "lorem12345"
 }
 
-http://localhost:3000/users/create ile user create edildikten sonra aşağıdaki şekilde db'den oluşturulan user kaydı kontrol edilebilir.
-
--> SH
-
--> SHOW TABLES;
-
--> select * from Users;

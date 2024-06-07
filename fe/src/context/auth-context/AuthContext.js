@@ -132,10 +132,10 @@ export const AuthProvider = ({ children }) => {
         await checkMessages();
       }
     };
-  
+
     fetchData();
-  }, [currentUser, unreadMessages]); 
-  
+  }, [currentUser, unreadMessages]);
+
   const updateFavoriteAds = async (username, newFavoriteAds) => {
     try {
       const response = await axios.post(
@@ -183,6 +183,7 @@ export const AuthProvider = ({ children }) => {
         sendMessage,
         currentConversationReceiver,
         updateMessagesReadTrue,
+        setCurrentConversationReceiver,
       }}
     >
       {children}
