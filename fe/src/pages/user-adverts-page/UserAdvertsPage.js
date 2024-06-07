@@ -8,7 +8,7 @@ const UserAdvertsPage = () => {
     container
     spacing={2}
     marginTop={0}
-    padding={"2rem"}
+    padding={"50px 10rem"}
   >
      <Grid item xs={12} display={"flex"} justifyContent={"center"} marginBottom={"12px"}>
         <Typography variant="h2" gutterBottom sx={{fontSize:"24px",fontWeight:900}}>

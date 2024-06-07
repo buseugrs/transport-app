@@ -212,7 +212,7 @@ const AddVehicleAdvertForm = () => {
 
   return (
     <Box>
-      <Card variant="outlined" sx={{ p: 0, mb: 4 }}>
+      <Card variant="outlined" sx={{ padding:"50px 10rem", mb: 4 }}>
         <Box sx={{ padding: "15px 30px" }} display="flex" alignItems="center">
           <Box flexGrow={1}>
             <Typography

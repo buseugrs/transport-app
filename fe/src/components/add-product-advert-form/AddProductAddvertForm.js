@@ -217,7 +217,7 @@ const AddProductAddvertForm = () => {
 
   return (
     <div>
-      <Card variant="outlined" sx={{ p: 0 }}>
+      <Card variant="outlined" sx={{ padding:"50px 10rem" }}>
         <Box sx={{ padding: "15px 30px" }} display="flex" alignItems="center">
           <Box flexGrow={1}>
             <Typography sx={{ fontSize: "18px", fontWeight: "900", color:"#1976d2" }}>
