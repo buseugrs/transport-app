@@ -7,11 +7,18 @@ export const useAdverts = () => {
 };
 
 export const AdvertsProvider = ({ children }) => {
+
   const [adverts, setAdverts] = useState([]);
+  // Eşya ilanları
   const [productAdverts, setProductAdverts] = useState([]);
+
+  //Araç ilanları
   const [vehicleAdverts, setVehicleAdverts] = useState([]);
+
+    // İlanları tutan state
   const [allAdverts, setAllAdverts] = useState([]);
 
+  // Sayfa render olduğunda ilanlara ait dataları alan fonksiyon
   const fetchData = async () => {
     try {
       const response = await fetch("http://localhost:3000/ads/");
@@ -25,6 +32,7 @@ export const AdvertsProvider = ({ children }) => {
     }
   };
 
+  // İlan silme
   const deleteAd = async (adId) => {
       try {
           const response = await fetch(`http://localhost:3000/ads/`, {

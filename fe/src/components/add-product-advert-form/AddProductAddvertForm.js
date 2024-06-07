@@ -165,19 +165,19 @@ const AddProductAddvertForm = () => {
 
     const adData = {
       username: currentUser.username,
-      adPhoto: newProduct.image, // İlan fotoğrafı
-      adTitle: newProduct.name, // İlan başlığı
-      adDescription: newProduct.description, // İlan açıklaması
-      budget: newProduct.budget, // Bütçe
-      isProduct: true, // Ürün ilanı olduğunu belirtiyoruz
-      productSpecialType: newProduct.pname, // Ürün türü
-      productSpecialDate: newProduct.deliveryDate, // Teslim tarihi
-      productSpecialStartCity: newProduct.fromCity, // Başlangıç şehri
-      productSpecialEndCity: newProduct.toCity, // Varış şehri
+      adPhoto: newProduct.image, 
+      adTitle: newProduct.name, 
+      adDescription: newProduct.description, 
+      budget: newProduct.budget, 
+      isProduct: true,
+      productSpecialType: newProduct.pname, 
+      productSpecialDate: newProduct.deliveryDate, 
+      productSpecialStartCity: newProduct.fromCity, 
+      productSpecialEndCity: newProduct.toCity, 
       productSpecialIsElevatorNeeded:
-        newProduct.elevatorRequired === "yes", // Asansör gereksinimi
-      productSpecialStartFloor: parseInt(newProduct.fromFloor), // Başlangıç katı
-      productSpecialEndFloor: parseInt(newProduct.toFloor), // Varış katı
+        newProduct.elevatorRequired === "yes", 
+      productSpecialStartFloor: parseInt(newProduct.fromFloor), 
+      productSpecialEndFloor: parseInt(newProduct.toFloor), 
     };
 
     axios
@@ -203,7 +203,7 @@ const AddProductAddvertForm = () => {
         fetchData();
       })
       .catch((error) => {
-        console.error(error.response.data.message); // Sunucudan gelen hata mesajı
+        console.error(error.response.data.message);
         setSnackbarMessage(
           "Ürün eklenirken bir hata oluştu: " + error.response.data.message
         );

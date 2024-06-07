@@ -168,12 +168,12 @@ const AddVehicleAdvertForm = () => {
 
     const adData = {
       username: currentUser.username,
-      adPhoto: newListing.image, // İlan fotoğrafı
-      adTitle: newListing.name, // İlan başlığı
-      adDescription: newListing.description, // İlan açıklaması
-      budget: newListing.budget, // Bütçe
+      adPhoto: newListing.image, 
+      adTitle: newListing.name, 
+      adDescription: newListing.description, 
+      budget: newListing.budget, 
       isProduct: false, // Araç ilanı olduğunu belirtiyoruz
-      vehicleSpecialLicensePlate: newListing.post,
+      vehicleSpecialLicensePlate: newListing.post, 
       vehicleSpecialType: newListing.pname,
       vehicleSpecialServiceCities: newListing.selectedCities.toString(),
     };
@@ -198,7 +198,7 @@ const AddVehicleAdvertForm = () => {
         fetchData();
       })
       .catch((error) => {
-        console.error(error.response.data.message); // Sunucudan gelen hata mesajı
+        console.error(error.response.data.message);
         setSnackbarMessage(
           "Ürün eklenirken bir hata oluştu: " + error.response.data.message
         );

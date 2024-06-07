@@ -10,6 +10,7 @@ const ConversationWindow = () => {
     currentConversationReceiver,
   } = useAuth();
 
+  // Mesaj gönderme durumunda mesaj yazma kutusunu güncellemek için
   const [newMessage, setNewMessage] = useState("");
 
   const handleSendMessage = () => {

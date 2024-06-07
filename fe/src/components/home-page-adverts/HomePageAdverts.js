@@ -4,9 +4,9 @@ import Adverts from "../adverts/Adverts";
 import { useAdverts } from "../../context/adverts-context/AdvertsContext";
 
 const HomePageAdverts = () => {
-  const { adverts } = useAdverts(); // Destructure the adverts array from the context
+  const { adverts } = useAdverts(); 
   if (adverts && adverts.length > 0) {
-    // Check if adverts is not empty and is an array
+    // İlan varsa ve boş değilse aşağıdaki componenti döndür
     return (
       <Grid
         container
