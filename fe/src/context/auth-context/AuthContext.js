@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     navigate("/"); // Navigate to home before setting user to null
     setCurrentUser(null);
+    setCurrentConversation([]);
     localStorage.removeItem("currentUser");
   };
 

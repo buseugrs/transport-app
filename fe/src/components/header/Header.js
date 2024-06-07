@@ -22,7 +22,6 @@ const Header = () => {
   const { currentUser, logout, unreadMessages, updateMessagesReadTrue } =
     useAuth();
   const navigate = useNavigate();
-  console.log(unreadMessages);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);

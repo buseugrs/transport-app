@@ -10,8 +10,6 @@ const ConversationWindow = () => {
     currentConversationReceiver,
   } = useAuth();
 
-  console.log(currentConversationReceiver);
-
   const [newMessage, setNewMessage] = useState("");
 
   const handleSendMessage = () => {
@@ -20,6 +18,7 @@ const ConversationWindow = () => {
     sendMessage(currentConversationReceiver, newMessage);
     setNewMessage("");
   };
+  
 
   return (
     <Box
