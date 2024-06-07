@@ -5,7 +5,6 @@ import { useAdverts } from "../../context/adverts-context/AdvertsContext";
 
 const HomePageAdverts = () => {
   const { adverts } = useAdverts(); // Destructure the adverts array from the context
-
   if (adverts && adverts.length > 0) {
     // Check if adverts is not empty and is an array
     return (

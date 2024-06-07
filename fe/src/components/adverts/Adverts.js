@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
-import axios from "axios";
 
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
@@ -11,6 +10,7 @@ import AspectRatio from "@mui/joy/AspectRatio";
 import Button from "@mui/joy/Button";
 import StarIcon from "@mui/icons-material/Star";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
+import DeleteAlert from "../delete-alert/DeleteAlert";
 
 const Adverts = ({ advert }) => {
   const {
@@ -54,6 +54,9 @@ const Adverts = ({ advert }) => {
         >
           {advert.adTitle}
         </Typography>
+          {currentUser && currentUser.username === advert.username ? (
+              <DeleteAlert advert={advert}/>
+          ) : null}
         {currentUser && (
           <IconButton
             aria-label={`bookmark ${advert.adTitle}`}
@@ -61,7 +64,7 @@ const Adverts = ({ advert }) => {
             variant="plain"
             // Favoriye eklenmişse renk değiştir
             size="sm"
-            sx={{ position: "absolute", top: "0.875rem", right: "0.5rem" }}
+            sx={{ position: "absolute",  right: "0.5rem" }}
           >
             {favoriteAds && favoriteAds.includes(advert.id) ? (
               <StarIcon sx={{ color: "orange" }} />

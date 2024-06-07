@@ -19,5 +19,19 @@ const addAd = async (req, res) => {
     }
 };
 
+const deleteAd = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const deleted = await Ad.destroy({ where: { id } });
+        if (deleted) {
+            res.status(200).json({ message: 'Ad deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Ad not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-module.exports = { getAds, addAd };
+
+module.exports = { getAds, addAd, deleteAd };

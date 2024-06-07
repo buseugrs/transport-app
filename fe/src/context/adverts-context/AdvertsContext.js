@@ -25,6 +25,28 @@ export const AdvertsProvider = ({ children }) => {
     }
   };
 
+  const deleteAd = async (adId) => {
+      try {
+          const response = await fetch(`http://localhost:3000/ads/`, {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ id: adId })
+          });
+          if (response.ok) {
+              // İlan başarıyla silindi
+              console.log('Ad deleted successfully');
+              await fetchData();
+          } else {
+              // İlan silme başarısız
+              console.error('Failed to delete ad');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -34,6 +56,7 @@ export const AdvertsProvider = ({ children }) => {
       value={{
         adverts,
         fetchData,
+        deleteAd,
         productAdverts,
         vehicleAdverts,
         setAdverts,
