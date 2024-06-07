@@ -12,6 +12,11 @@ const AdvertDetail = () => {
   const { advertId } = useParams();
   const advert = adverts.find((ad) => ad.id === parseInt(advertId));
 
+   // Tarih nesnesini oluştur
+   const createdAtDate = new Date(advert.createdAt);
+   // Tarihi TR formatına dönüştür
+   const formattedCreatedAt = createdAtDate.toLocaleDateString("tr-TR");
+
   return (
     <Grid container spacing={2} padding={2}>
       <Grid item xs={12}>
@@ -46,7 +51,7 @@ const AdvertDetail = () => {
             <tbody>
               <tr>
                 <td>İlan Tarihi</td>
-                <td>{advert.createdAt}</td>
+                <td>{formattedCreatedAt}</td>
               </tr>
               <tr>
                 {advert.isProduct ? <td>Ürün Adı</td> : <td>Firma Adı</td>}
