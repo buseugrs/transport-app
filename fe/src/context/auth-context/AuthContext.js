@@ -16,6 +16,8 @@ export const AuthProvider = ({ children }) => {
   const [unreadMessages, setUnreadMessages] = useState(false);
   const [conversationHistory, setConversationHistory] = useState([]);
   const [currentConversation, setCurrentConversation] = useState([]);
+  const [signUpError, setSignUpError] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [currentConversationReceiver, setCurrentConversationReceiver] =
     useState("");
   const navigate = useNavigate();
@@ -35,8 +37,10 @@ export const AuthProvider = ({ children }) => {
       await getFavoriteAds(userData.username);
       // Kullanıcı oturum bilgilerini localStorage'e kaydet
       localStorage.setItem("currentUser", JSON.stringify(userData));
+      setLoginError("");
     } catch (error) {
       console.error("Login failed:", error);
+      setLoginError("Kullanıcı adı veya şifre hatalı!");
       throw error;
     }
   };
@@ -54,8 +58,10 @@ export const AuthProvider = ({ children }) => {
         password,
         username,
       });
+      setSignUpError("");
     } catch (error) {
       console.error("Signup failed:", error);
+      setSignUpError("Kullanıcı adı ve/veya E-Mail zaten var!");
       throw error;
     }
   };
@@ -184,6 +190,8 @@ export const AuthProvider = ({ children }) => {
         currentConversationReceiver,
         updateMessagesReadTrue,
         setCurrentConversationReceiver,
+        signUpError,
+        loginError
       }}
     >
       {children}

@@ -21,7 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 const SignUp = () => {
-  const { signup } = useAuth();
+  const { signup, signUpError } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -71,6 +71,9 @@ const SignUp = () => {
           </Avatar>
           <Typography component="h1" variant="h5">
             Hesap Aç
+          </Typography>
+          <Typography sx={{ color: "red", fontWeight: "900"}}>
+            {signUpError}
           </Typography>
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>

@@ -21,7 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const defaultTheme = createTheme();
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, loginError } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -84,6 +84,9 @@ const Login = () => {
             <Typography component="h1" variant="h5">
               Giriş Yap
             </Typography>
+              <Typography sx={{ color: "red", fontWeight: "900"}}>
+                  {loginError}
+              </Typography>
             <Box
               component="form"
               noValidate

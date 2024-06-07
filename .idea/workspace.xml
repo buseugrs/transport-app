@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b710b187-390c-41bb-ae5b-5023cb3f49d9" name="Changes" comment="favorites &amp; myAds bug fixing">
-      <change afterPath="$PROJECT_DIR$/fe/src/components/delete-alert/DeleteAlert.js" afterDir="false" />
+    <list default="true" id="b710b187-390c-41bb-ae5b-5023cb3f49d9" name="Changes" comment="signup error handling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/be/config/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/config/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/be/controllers/adController.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/controllers/adController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/be/routes/adRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/be/routes/adRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/components/adverts/Adverts.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/adverts/Adverts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/components/home-page-adverts/HomePageAdverts.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/components/home-page-adverts/HomePageAdverts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fe/src/context/adverts-context/AdvertsContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/context/adverts-context/AdvertsContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/context/auth-context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/context/auth-context/AuthContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/pages/login-page/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/pages/login-page/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fe/src/pages/sign-up-page/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/fe/src/pages/sign-up-page/SignUp.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +107,7 @@
       <workItem from="1717502050992" duration="98000" />
       <workItem from="1717689740234" duration="10713000" />
       <workItem from="1717751980398" duration="4000" />
-      <workItem from="1717787017799" duration="2615000" />
+      <workItem from="1717787017799" duration="3497000" />
     </task>
     <task id="LOCAL-00001" summary="first commit for fe">
       <option name="closed" value="true" />
@@ -160,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717705095232</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="advert deleting logic">
+      <option name="closed" value="true" />
+      <created>1717789752764</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717789752764</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +177,8 @@
     <MESSAGE value="favoriteAds bug fix" />
     <MESSAGE value="bug fixing" />
     <MESSAGE value="favorites &amp; myAds bug fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="favorites &amp; myAds bug fixing" />
+    <MESSAGE value="advert deleting logic" />
+    <MESSAGE value="signup error handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="signup error handling" />
   </component>
 </project>
