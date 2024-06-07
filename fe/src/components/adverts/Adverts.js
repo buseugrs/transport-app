@@ -21,11 +21,8 @@ const Adverts = ({ advert }) => {
     setCurrentConversationReceiver,
   } = useAuth();
 
-  console.log(advert);
-
   const handleMessageSend = async () => {
     setCurrentConversationReceiver(advert.username);
-    console.log(advert.username);
   };
 
   const handleFavoriteIconClick = () => {
@@ -116,24 +113,26 @@ const Adverts = ({ advert }) => {
           </div>
         )}
 
-        <Link to={`/mesajlarim`}>
-          <Button
-          onClick={handleMessageSend}
-            variant="solid"
-            size="lg"
-            color="primary"
-            sx={{
-              ml: "auto",
-              alignSelf: "center",
-              fontWeight: 600,
-              position: "absolute",
-              bottom: "1rem",
-              right: "1rem",
-            }}
-          >
-            Mesaj
-          </Button>
-        </Link>
+        {currentUser && currentUser.username !== advert.username ? (
+          <Link to={`/mesajlarim`}>
+            <Button
+              onClick={handleMessageSend}
+              variant="solid"
+              size="lg"
+              color="primary"
+              sx={{
+                ml: "auto",
+                alignSelf: "center",
+                fontWeight: 600,
+                position: "absolute",
+                bottom: "1rem",
+                right: "1rem",
+              }}
+            >
+              Mesaj
+            </Button>
+          </Link>
+        ) : null}
 
         <Link to={`/ilan/${advert.id}`}>
           <Button
