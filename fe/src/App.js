@@ -14,7 +14,8 @@ import UserFavoriteAdvertsPage from "./pages/user-favorite-adverts-page/UserFavo
 import AdvertDetailPage from "./pages/advert-detail-page/AdvertDetailPage";
 import UserMessagesPage from "./pages/user-messages-page/UserMessagesPage";
 import ConversationWindow from "./components/conversation-window/ConversationWindow";
-
+import Footer from "./components/footer/Footer";
+import AboutMe from "./pages/about-me/AboutMe";
 function App() {
   return (
     <Router>
@@ -36,7 +37,9 @@ function App() {
             <Route path="/ilan/:advertId" element={<AdvertDetailPage />} />
             <Route path="/mesajlarim" element={<UserMessagesPage />} />
             <Route path="/mesaj-yaz/:username" element={<ConversationWindow />} />
+            <Route path="/hakkimda" element={<AboutMe />} />
           </Routes>
+          <Footer/>
         </AdvertsProvider>
       </AuthProvider>
     </Router>

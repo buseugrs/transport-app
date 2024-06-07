@@ -2,7 +2,6 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth-context/AuthContext";
-import axios from "axios";
 import RadioButtons from "../radio-buttons/RadioButtons";
 
 import AppBar from "@mui/material/AppBar";
