@@ -13,6 +13,7 @@ import UserAdvertsPage from "./pages/user-adverts-page/UserAdvertsPage";
 import UserFavoriteAdvertsPage from "./pages/user-favorite-adverts-page/UserFavoriteAdvertsPage";
 import AdvertDetailPage from "./pages/advert-detail-page/AdvertDetailPage";
 import UserMessagesPage from "./pages/user-messages-page/UserMessagesPage";
+import ConversationWindow from "./components/conversation-window/ConversationWindow";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             />
             <Route path="/ilan/:advertId" element={<AdvertDetailPage />} />
             <Route path="/mesajlarim" element={<UserMessagesPage />} />
+            <Route path="/mesaj-yaz/:username" element={<ConversationWindow />} />
           </Routes>
         </AdvertsProvider>
       </AuthProvider>
