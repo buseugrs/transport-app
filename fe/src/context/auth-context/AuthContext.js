@@ -90,7 +90,6 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(
         `http://localhost:3000/messages/check/${currentUser.username}`
       );
-      console.log("checkMessages", response.data);
       setUnreadMessages(response.data.unreadMessages);
       const incomingMessagesFrom = response.data.incomingMessagesFrom.map(
         (message) => message.sender

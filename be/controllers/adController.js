@@ -1,4 +1,5 @@
 const Ad = require('../models/Ad');
+const User = require('../models/User');
 
 const getAds = async (req, res) => {
     try {
@@ -24,7 +25,17 @@ const deleteAd = async (req, res) => {
     try {
         const deleted = await Ad.destroy({ where: { id } });
         if (deleted) {
-            res.status(200).json({ message: 'Ad deleted successfully' });
+            const users = await User.findAll();
+            for (const user of users) {
+                let favoriteAds = user.favoriteAds || [];
+                if (favoriteAds.includes(id)) {
+                    // ID'yi favoriteAds listesinden çıkar
+                    favoriteAds = favoriteAds.filter(adId => adId !== id);
+                    // Kullanıcıyı güncelle
+                    await User.update({ favoriteAds }, { where: { id: user.id } });
+                }
+            }
+            res.status(200).json({ message: 'Ad deleted successfully and removed from favoriteAds' });
         } else {
             res.status(404).json({ message: 'Ad not found' });
         }

@@ -31,6 +31,7 @@ const UserProfile = () => {
   const { adverts} = useAdverts(); // Destructure adverts and favoriteAds from the context
   const { currentUser, favoriteAds } = useAuth(); // Destructure currentUser from the context
   
+  console.log(favoriteAds);
 
   // Kullanıcı tarafından eklenen ilan sayısı
   const userAdCount = adverts.filter(
